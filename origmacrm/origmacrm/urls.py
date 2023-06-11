@@ -16,14 +16,13 @@ Including another URLconf
 """
 from django.conf import settings
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import include, path
 from django.views import defaults as default_views
 
-
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
     path("users/", include("user.urls", namespace="users")),
-    path('dashboard/', include("customer.urls", namespace="customer")), 
+    path("dashboard/", include("customer.urls", namespace="customer")),
 ]
 
 if settings.DEBUG:
@@ -49,6 +48,6 @@ if settings.DEBUG:
     ]
 
 if "debug_toolbar" in settings.INSTALLED_APPS:
-        import debug_toolbar
+    import debug_toolbar
 
-        urlpatterns = [path("__debug__/", include(debug_toolbar.urls))] + urlpatterns
+    urlpatterns = [path("__debug__/", include(debug_toolbar.urls))] + urlpatterns

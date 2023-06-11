@@ -11,9 +11,7 @@ class TimeStampModel:
     updated_on = models.DateTimeField(auto_now=False, auto_now_add=False)
     start_date = models.DateField(auto_now=False, auto_now_add=False)
     end_date = models.DateField(auto_now=False, auto_now_add=False)
-    created_by = models.ForeignKey(
-        settings.AUTH_USER_MODEL,on_delete=models.CASCADE
-    )
+    created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
 
 class Customer(TimeStampModel):
@@ -39,12 +37,8 @@ class Customer(TimeStampModel):
 
     dba = models.CharField(max_length=50)
     name = models.CharField(max_length=50)
-    billing_address = models.ForeignKey(
-        "Address", on_delete=models.DO_NOTHING
-    )
-    shipping_address = models.ForeignKey(
-        "Address", on_delete=models.DO_NOTHING
-    )
+    billing_address = models.ForeignKey("Address", on_delete=models.DO_NOTHING)
+    shipping_address = models.ForeignKey("Address", on_delete=models.DO_NOTHING)
     active = models.CharField(choices=ACTIVE_OPTIONS, max_length=50)
     customer_type = models.CharField(choices=INDUSTRY_OPTIONS, max_length=100)
 
