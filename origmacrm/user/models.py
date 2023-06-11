@@ -10,11 +10,11 @@ class User(AbstractUser):
     first_name = None  # type: ignore
     last_name = None  # type: ignore
 
-    def get_absolute_url(self):
-        """Get url for user's detail view.
+    # def get_absolute_url(self):
+    #     """Get url for user's detail view.
 
-        Returns:
-            str: URL for user detail.
+    #     Returns:
+    #         str: URL for user detail.
 
-        """
-        return reverse("user:detail", kwargs={"username": self.username})
+    #     """
+    #     return reverse("user:detail", kwargs={"username": self.username})

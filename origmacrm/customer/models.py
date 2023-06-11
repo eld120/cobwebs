@@ -6,7 +6,7 @@ from django.db import models
 ACTIVE_OPTIONS = (("active", "Active"), ("active", "Inactive"), ("active", "Archived"))
 
 
-class TimeStampModel:
+class TimeStampModel(models.Model):
     created_on = models.DateTimeField(auto_now=False, auto_now_add=False)
     updated_on = models.DateTimeField(auto_now=False, auto_now_add=False)
     start_date = models.DateField(auto_now=False, auto_now_add=False)
@@ -37,8 +37,14 @@ class Customer(TimeStampModel):
 
     dba = models.CharField(max_length=50)
     name = models.CharField(max_length=50)
-    billing_address = models.ForeignKey("Address", on_delete=models.DO_NOTHING)
-    shipping_address = models.ForeignKey("Address", on_delete=models.DO_NOTHING)
+    billing_address = models.ForeignKey(
+        "Address", related_name="%(class)s_billing_address", on_delete=models.DO_NOTHING
+    )
+    shipping_address = models.ForeignKey(
+        "Address",
+        related_name="%(class)s_shipping_address",
+        on_delete=models.DO_NOTHING,
+    )
     active = models.CharField(choices=ACTIVE_OPTIONS, max_length=50)
     customer_type = models.CharField(choices=INDUSTRY_OPTIONS, max_length=100)
 

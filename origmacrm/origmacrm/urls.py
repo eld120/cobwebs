@@ -21,7 +21,7 @@ from django.views import defaults as default_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("users/", include("user.urls", namespace="users")),
+    path("users/", include("user.urls", namespace="user")),
     path("dashboard/", include("customer.urls", namespace="customer")),
 ]
 
