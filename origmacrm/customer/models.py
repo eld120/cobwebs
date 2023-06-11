@@ -52,8 +52,8 @@ class Customer(TimeStampModel):
 class Address(TimeStampModel):
     address_1 = models.CharField(max_length=100)
     address_2 = models.CharField(max_length=100)
-    city = models.CharField(_(""), max_length=50)
-    state = models.CharField(_(""), max_length=50)
-    zip_code = models.CharField(_(""), max_length=50)
-    phone = models.CharField(_(""), max_length=50)
-    email = models.CharField(_(""), max_length=50)
+    city = models.CharField(max_length=50)
+    state = models.CharField(max_length=50)
+    zip_code = models.CharField(max_length=50)
+    phone = models.CharField(max_length=50)
+    email = models.CharField(max_length=50)
