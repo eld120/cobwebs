@@ -1,7 +1,9 @@
 from django.urls import path
 
-# from origmacrm.customer import views
+from . import views
 
 app_name = "customer"
 
-urlpatterns = []
+urlpatterns = [
+    path("", views.HomePage.as_view(), name="home_page"),
+]
