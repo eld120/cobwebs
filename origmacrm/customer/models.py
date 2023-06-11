@@ -40,10 +40,10 @@ class Customer(TimeStampModel):
     dba = models.CharField(max_length=50)
     name = models.CharField(max_length=50)
     billing_address = models.ForeignKey(
-        "Address", verbose_name=_("Addresses"), on_delete=models.DO_NOTHING
+        "Address", on_delete=models.DO_NOTHING
     )
     shipping_address = models.ForeignKey(
-        "Address", verbose_name=_("Addresses"), on_delete=models.DO_NOTHING
+        "Address", on_delete=models.DO_NOTHING
     )
     active = models.CharField(choices=ACTIVE_OPTIONS, max_length=50)
     customer_type = models.CharField(choices=INDUSTRY_OPTIONS, max_length=100)
