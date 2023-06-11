@@ -12,7 +12,7 @@ class TimeStampModel:
     start_date = models.DateField(auto_now=False, auto_now_add=False)
     end_date = models.DateField(auto_now=False, auto_now_add=False)
     created_by = models.ForeignKey(
-        settings.AUTH_USER_MODEL, verbose_name=_(""), on_delete=models.CASCADE
+        settings.AUTH_USER_MODEL,on_delete=models.CASCADE
     )
 
 
