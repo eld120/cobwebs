@@ -50,6 +50,9 @@ class Customer(TimeStampModel):
     active = models.CharField(choices=ACTIVE_OPTIONS, max_length=50)
     customer_type = models.CharField(choices=INDUSTRY_OPTIONS, max_length=100)
 
+    def __str__(self) -> str:
+        return self.name
+
 
 class Address(TimeStampModel):
     address_1 = models.CharField(max_length=100)
@@ -59,3 +62,6 @@ class Address(TimeStampModel):
     zip_code = models.CharField(max_length=50)
     phone = models.CharField(max_length=50)
     email = models.CharField(max_length=50)
+
+    def __str__(self) -> str:
+        return self.address_1 + self.zip_code
