@@ -1,6 +1,6 @@
 from django.shortcuts import render
+from django.views.generic import DetailView, ListView
 from django.views.generic.base import TemplateView
-from django.views.generic import ListView
 
 from .models import Customer
 
@@ -12,5 +12,10 @@ class HomePage(TemplateView):
 
 class CustomerListView(ListView):
     model = Customer
-    template_name = 'dashboard.html'
-    #paginate_by = 10 
+    template_name = "dashboard.html"
+    # paginate_by = 10
+
+
+class CustomerDetailView(DetailView):
+    model = Customer
+    template_name = "customer_detail.html"
