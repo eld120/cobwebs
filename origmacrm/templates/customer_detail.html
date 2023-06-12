@@ -1,0 +1,29 @@
+{% extends 'home.html' %}
+
+{% block body %}
+
+    <table class="table">
+        <tbody>
+          <tr>
+            <th scope="row">Account</th>
+            <td>{{object.id}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Name 1</th>
+            <td>{{object.dba}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Name 2</th>
+            <td>{{object.name}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Billing Address</th>
+            <td>{{object.billing_address}}</td>
+          </tr>
+          <tr>
+            <th scope="row">Shipping Address</th>
+            <td>{{object.shipping_address}}</td>
+          </tr>
+        </tbody>
+      </table>
+{% endblock body %}
