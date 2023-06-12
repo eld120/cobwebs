@@ -7,8 +7,8 @@ ACTIVE_OPTIONS = (("active", "Active"), ("active", "Inactive"), ("active", "Arch
 
 
 class TimeStampModel(models.Model):
-    created_on = models.DateTimeField(auto_now=False, auto_now_add=False)
-    updated_on = models.DateTimeField(auto_now=False, auto_now_add=False)
+    created_on = models.DateTimeField(auto_now=False, auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True, auto_now_add=False)
     start_date = models.DateField(auto_now=False, auto_now_add=False)
     end_date = models.DateField(auto_now=False, auto_now_add=False)
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
