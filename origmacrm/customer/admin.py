@@ -1,5 +1,7 @@
 from django.contrib import admin
-from .models import Customer, Address
+
+from .models import Address, Customer
+
 
 # Register your models here.
 class CustomerAdmin(admin.ModelAdmin):
