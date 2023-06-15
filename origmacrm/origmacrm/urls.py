@@ -21,7 +21,8 @@ from django.views import defaults as default_views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("users/", include("user.urls", namespace="user")),
+    path("accounts/", include("django.contrib.auth.urls")),
+    path("user/", include("user.urls", namespace="user")),
     path("", include("customer.urls", namespace="customer")),
 ]
 
