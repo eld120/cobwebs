@@ -146,4 +146,4 @@ INTERNAL_IPS = [
 ]
 LOGIN_REDIRECT_URL = "customer:dashboard"
 
-LOGOUT_REDIRECT_URL = "home"
+LOGOUT_REDIRECT_URL = "customer:home"
