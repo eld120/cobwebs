@@ -61,19 +61,6 @@ class CustomerUpdateView(LoginRequiredMixin, UpdateView):
         "customer_type",
     )
 
-    # def get_initial(self) -> Dict[str, Any]:
-    #     return {
-    #         "dba": ,
-    #         "name",
-    #         "billing_address",
-    #         "shipping_address",
-    #         "start_date",
-    #         "end_date",
-    #         "created_by",
-    #         "active",
-    #         "customer_type",
-    #     }
-
 
 class AddressCreateView(LoginRequiredMixin, CreateView):
     pass
