@@ -19,12 +19,19 @@ from django.contrib import admin
 from django.urls import include, path
 from django.views import defaults as default_views
 
+from . import base_views
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("accounts/", include("django.contrib.auth.urls")),
     path("user/", include("user.urls", namespace="user")),
     path("", include("customer.urls", namespace="customer")),
 ]
+
+handler404 = base_views.not_found_404
+handler500 = base_views.server_error_500
+handler403 = base_views.forbidden_403
+handler400 = base_views.bad_request_400
 
 if settings.DEBUG:
     # This allows the error pages to be debugged during development, just visit
