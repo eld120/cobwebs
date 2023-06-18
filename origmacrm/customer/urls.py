@@ -15,5 +15,11 @@ urlpatterns = [
         "customer/<int:pk>/", views.CustomerDetailView.as_view(), name="customer_detail"
     ),
     path("customer/", views.CustomerCreateView.as_view(), name="customer_create"),
+    path(
+        "address-update/<int:pk>",
+        views.AddressUpdateView.as_view(),
+        name="address_update",
+    ),
+    path("address/", views.AddressCreateView.as_view(), name="address_create"),
     path("", views.HomePage.as_view(), name="home"),
 ]

@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.views.generic.base import TemplateView
 
-from .models import Customer
+from .models import Address, Customer
 
 
 # Create your views here.
@@ -63,8 +63,28 @@ class CustomerUpdateView(LoginRequiredMixin, UpdateView):
 
 
 class AddressCreateView(LoginRequiredMixin, CreateView):
-    pass
+    model = Address
+    template_name = "address_form.html"
+    fields = (
+        "address_1",
+        "address_2",
+        "city",
+        "state",
+        "zip_code",
+        "phone",
+        "email",
+    )
 
 
 class AddressUpdateView(LoginRequiredMixin, UpdateView):
-    pass
+    model = Address
+    template_name = "address_form.html"
+    fields = (
+        "address_1",
+        "address_2",
+        "city",
+        "state",
+        "zip_code",
+        "phone",
+        "email",
+    )
