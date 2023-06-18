@@ -3,72 +3,74 @@
 {% block body %}
   <div class="container w-50" >
 
-      {% if create_customer %}
-      <h2>Create Customer</h2>
-      {% else %}
-      <h2>Update Customer</h2>
-      {% endif %}
+    {% if create_customer %}
+      <h2 class="mb-3">Create Customer</h2>
+    {% else %}
+      <h2 class="mb-3">Update Customer</h2>
+    {% endif %}
 
-      <form method="POST" >
+    <form method="POST" >
+
+      <div class="mb-3 form-floating">
+        <input type="text" class="form-control"
+          id="dbaFormLabel" aria-describedby="business name"
+          {% if not create_customer %}value="{{ customer.dba | upper}}"{% endif %}
+          placeholder="DBA"/>
+        <label for="input_dba" for="dbaFormLabel" class="form-control">DBA</label>
+      </div>
+      <div class="mb-3 form-floating">
+        <input type="text" class="form-control"
+        id="nameFormLabel"
+        placeholder="Legal Business Name"
+        {% if not create_customer %}value="{{ customer.name | upper}}"{% endif %}/>
+        <label for="InputName" for="nameFormLabel" class="form-label">Legal Business Name</label>
+      </div>
+      <div class="mb-3 form-floating">
+        <select  class="form-control" id="billingFormLabel">
+          <option {% if create_customer %}value="" {% else %}value="{{ customer.billing_address | upper}}"{% endif %}>{{customer.billing_address}}</option>
+        </select>
+        <label for="BillingAddress" for="billingFormLabel" class="form-label">Billing Address</label>
+      </div>
+      <div class="mb-3 form-floating">
+        <select  class="form-control" id="shippingFormLabel">
+          <option {% if create_customer %}value="" {% else %}value="{{ customer.shipping_address | upper}}"{% endif %}>{{customer.shipping_address}}</option>
+        </select>
+        <label for="ShippingAddress" for="shippingFormLabel" class="form-label">Shipping Address</label>
+      </div>
+      <div class="mb-3 form-floating">
+        <input type="text" class="form-control" id="startDateLabel"
+        placeholder="Start Date"
+        {% if not create_customer %}value="{{ customer.start_date }}"{% endif %}/>
+        <label for="StartDate" for="startDateLabel" class="form-label">Start Date</label>
+      <div class="mb-3 form-floating">
+        <input type="text" class="form-control" id="endDateLabel"
+        placeholder="End Date"
+        {% if not create_customer %}value="{{ customer.end_date }}"{% endif %}/>
+        <label for="EndDate" for="endDateLabel" class="form-label">End Date</label>
+      </div>
+      <div class="mb-3 form-floating">
+        <input type="text" class="form-control" id="createdByLabel"
+        placeholder="Created By"
+        {% if not create_customer %}value="{{ customer.created_by | upper}}"{% endif %}/>
+        <label for="CreatedBy" for="createdByLabel" class="form-label">Created By</label>
+      </div>
+      <div class="mb-3 form-floating">
+        <input type="text" class="form-control" id="activeFlagLabel"
+        placeholder="Active"
+        {% if not create_customer %}value="{{ customer.active | upper}}"{% endif %}/>
+        <label for="Active" for="activeFlagLabel" class="form-label">Active</label>
+      </div>
+      <div class="mb-3 form-floating">
+        <input type="text" class="form-control" id="customerTypeLabel"
+
+        {% if not create_customer %}value="{{ customer.customer_type | upper}}"{% endif %}/>
+        <label for="CustomerType" for="customerTypeLabel" class="form-label">Customer Type</label>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
       {% csrf_token %}
-        <div class="mb-3">
-      <label for="input_dba" class="form-label">DBA</label>
-      <input
-        type="text"
-        class="form-control"
-        aria-describedby="business name"
-        {% if not create_customer %}value="{{ customer.dba | upper}}"{% endif %}
-      />
-      </div>
-        <div class="mb-3">
-      <label for="InputName" class="form-label">Legal Business Name</label>
-      <input type="text" class="form-control"
-      {% if not create_customer %}value="{{ customer.name | upper}}"{% endif %}/>
-        </div>
-        <div class="mb-3">
-      <label for="BillingAddress" class="form-label">Billing Address</label>
-      <select  class="form-control">
-        <option {% if create_customer %}value="" {% else %}value="{{ customer.billing_address | upper}}"{% endif %}>{{customer.billing_address}}</option>
-        <option value="create address">Create Address</option>
-        </select>
-      </div>
-        <div class="mb-3">
-      <label for="ShippingAddress" class="form-label">Shipping Address</label>
-      <select  class="form-control">
-        <option {% if create_customer %}value="" {% else %}value="{{ customer.shipping_address | upper}}"{% endif %}>{{customer.shipping_address}}</option>
-        <option value="create address">Create Address</option>
-        </select>
-        </div>
-        <div class="mb-3">
-      <label for="StartDate" class="form-label">Start Date</label>
-      <input type="text" class="form-control"
-      {% if not create_customer %}value="{{ customer.start_date }}"{% endif %}/>
-        <div class="mb-3">
-      <label for="EndDate" class="form-label">End Date</label>
-      <input type="text" class="form-control"
-      {% if not create_customer %}value="{{ customer.end_date }}"{% endif %}/>
-        </div>
-        <div class="mb-3">
-      <label for="CreatedBy" class="form-label">Created By</label>
-      <input type="text" class="form-control"
-      {% if not create_customer %}value="{{ customer.created_by | upper}}"{% endif %}/>
-        </div>
-        <div class="mb-3">
-      <label for="Active" class="form-label">Active</label>
-      <input type="text" class="form-control"
-      {% if not create_customer %}value="{{ customer.active | upper}}"{% endif %}/>
-        </div>
-        <div class="mb-3">
-      <label for="CustomerType" class="form-label">Customer Type</label>
-      <input type="text" class="form-control"
-      {% if not create_customer %}value="{{ customer.customer_type | upper}}"{% endif %}/>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+    </form>
   </div>
- <!--  "start_date",
-    "end_date", "created_by", "active"
-     , "customer_type"  -->
+
 
 
 

@@ -1,0 +1,45 @@
+{% extends 'home.html' %}
+
+{% block body %}
+  <div class="container w-50" >
+
+    {% if create_address %}
+      <h2>Create Address</h2>
+    {% else %}
+      <h2>Update Address</h2>
+    {% endif %}
+    <br>
+    <form method="POST" >
+      {% csrf_token %}
+      <div class="mb-3 form-floating">
+        <input type="text" class="form-control" id="addressOneInput">
+        <label for="addressOneInput">Address Line 1</label>
+      </div>
+      <div class="mb-3 form-floating" >
+        <input type="text" class="form-control" id="addressTwoInput">
+        <label for="addressTwoInput">Address Line 2</label>
+      </div>
+      <div class="mb-3 form-floating">
+        <input type="text" class="form-control" id="cityInput">
+        <label for="cityInput">City</label>
+      </div>
+      <div class="mb-3 form-floating">
+        <input type="text" class="form-control" id="stateInput">
+        <label for="stateInput">State</label>
+      </div>
+      <div class="mb-3 form-floating">
+        <input type="text" class="form-control" id="zipCodeInput">
+        <label for="zipCodeInput">Zip Code</label>
+      </div>
+      <div class="mb-3 form-floating">
+        <input type="text" class="form-control" id="phoneNumberInput">
+        <label for="phoneNumberInput">Phone Number</label>
+      </div>
+      <div class="mb-3 form-floating">
+        <input type="text" class="form-control" id="emailInput">
+        <label for="emailInput">Email</label>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+{% endblock body %}
