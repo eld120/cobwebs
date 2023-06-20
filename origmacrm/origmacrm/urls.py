@@ -26,6 +26,7 @@ urlpatterns = [
     path("accounts/", include("django.contrib.auth.urls")),
     path("user/", include("user.urls", namespace="user")),
     path("", include("customer.urls", namespace="customer")),
+    path("api-auth/", include("rest_framework.urls")),
 ]
 
 handler404 = base_views.not_found_404
