@@ -1,3 +1,5 @@
+import uuid
+
 from django.conf import settings
 from django.db import models
 
@@ -36,7 +38,7 @@ class Customer(TimeStampModel):
         ("utilities", "Utilities"),
         ("wholesale", "Wholesale"),
     )
-    uuid = models.UUIDField(null=True)
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False)
     dba = models.CharField(max_length=50)
     name = models.CharField(max_length=50)
     billing_address = models.ForeignKey(
@@ -55,7 +57,7 @@ class Customer(TimeStampModel):
 
 
 class Address(TimeStampModel):
-    uuid = models.UUIDField(null=True)
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False)
     address_1 = models.CharField(max_length=100)
     address_2 = models.CharField(max_length=100)
     city = models.CharField(max_length=50)
