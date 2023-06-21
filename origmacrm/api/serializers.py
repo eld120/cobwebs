@@ -7,6 +7,7 @@ class AddressSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Address
         fields = (
+            "uuid",
             "address_1",
             "address_2",
             "city",
@@ -19,7 +20,7 @@ class AddressSerializer(serializers.HyperlinkedModelSerializer):
         )
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = "__all__"

@@ -6,6 +6,8 @@ from .serializers import AddressSerializer, UserSerializer
 
 
 class AddressViewset(viewsets.ModelViewSet):
+    """returns all addresses"""
+
     queryset = Address.objects.all()
     serializer_class = AddressSerializer
     permission_classes = [permissions.IsAuthenticated]
