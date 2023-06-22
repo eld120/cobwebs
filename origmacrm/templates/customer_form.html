@@ -1,70 +1,81 @@
 {% extends 'home.html' %}
 
 {% block body %}
+
+
   <div class="container w-50" >
 
     {% if create_customer %}
-      <h2 class="mb-3">Create Customer</h2>
+    <h2 class="mb-3">Create Customer</h2>
     {% else %}
-      <h2 class="mb-3">Update Customer</h2>
+    <h2 class="mb-3">Update Customer</h2>
     {% endif %}
 
-    <form method="POST" >
-
+    <form method="POST" class="p2">
       <div class="mb-3 form-floating">
         <input type="text" class="form-control"
-          id="dbaFormLabel" aria-describedby="business name"
-          {% if not create_customer %}value="{{ customer.dba | upper}}"{% endif %}
-          placeholder="DBA"/>
-        <label for="input_dba" for="dbaFormLabel" class="form-control">DBA</label>
+          id="dbaFormLabel"
+          placeholder="DBA"
+          {% if not create_customer %}value="{{ customer.dba | upper}}"{% endif %}/>
+        <label for="dbaFormLabel" class="form-label">DBA</label>
       </div>
       <div class="mb-3 form-floating">
         <input type="text" class="form-control"
         id="nameFormLabel"
         placeholder="Legal Business Name"
         {% if not create_customer %}value="{{ customer.name | upper}}"{% endif %}/>
-        <label for="InputName" for="nameFormLabel" class="form-label">Legal Business Name</label>
+        <label for="nameFormLabel" class="form-label">Legal Business Name</label>
       </div>
       <div class="mb-3 form-floating">
         <select  class="form-control" id="billingFormLabel">
           <option {% if create_customer %}value="" {% else %}value="{{ customer.billing_address | upper}}"{% endif %}>{{customer.billing_address}}</option>
+          {% for address in address_list %}
+            <option value="{{ address | upper}}">{{address}}</option>
+          {% endfor %}
         </select>
-        <label for="BillingAddress" for="billingFormLabel" class="form-label">Billing Address</label>
+        <label for="billingFormLabel" class="form-label">Billing Address</label>
       </div>
       <div class="mb-3 form-floating">
         <select  class="form-control" id="shippingFormLabel">
-          <option {% if create_customer %}value="" {% else %}value="{{ customer.shipping_address | upper}}"{% endif %}>{{customer.shipping_address}}</option>
+
+          <option {% if create_customer %}value="" {% else %} value="{{ customer.shipping_address | upper}}" {% endif %}>{{customer.shipping_address}}</option>
+
+          {% for address in address_list %}
+            <option value="{{ address | upper}}">{{address}}</option>
+          {% endfor %}
+
         </select>
-        <label for="ShippingAddress" for="shippingFormLabel" class="form-label">Shipping Address</label>
+        <label for="shippingFormLabel" class="form-label">Shipping Address</label>
       </div>
       <div class="mb-3 form-floating">
         <input type="text" class="form-control" id="startDateLabel"
         placeholder="Start Date"
         {% if not create_customer %}value="{{ customer.start_date }}"{% endif %}/>
-        <label for="StartDate" for="startDateLabel" class="form-label">Start Date</label>
+        <label for="startDateLabel" class="form-label">Start Date</label>
+      </div>
       <div class="mb-3 form-floating">
         <input type="text" class="form-control" id="endDateLabel"
         placeholder="End Date"
         {% if not create_customer %}value="{{ customer.end_date }}"{% endif %}/>
-        <label for="EndDate" for="endDateLabel" class="form-label">End Date</label>
+        <label for="endDateLabel" class="form-label">End Date</label>
       </div>
       <div class="mb-3 form-floating">
         <input type="text" class="form-control" id="createdByLabel"
         placeholder="Created By"
         {% if not create_customer %}value="{{ customer.created_by | upper}}"{% endif %}/>
-        <label for="CreatedBy" for="createdByLabel" class="form-label">Created By</label>
+        <label for="createdByLabel" class="form-label">Created By</label>
       </div>
       <div class="mb-3 form-floating">
         <input type="text" class="form-control" id="activeFlagLabel"
         placeholder="Active"
         {% if not create_customer %}value="{{ customer.active | upper}}"{% endif %}/>
-        <label for="Active" for="activeFlagLabel" class="form-label">Active</label>
+        <label for="activeFlagLabel" class="form-label">Active</label>
       </div>
       <div class="mb-3 form-floating">
         <input type="text" class="form-control" id="customerTypeLabel"
 
         {% if not create_customer %}value="{{ customer.customer_type | upper}}"{% endif %}/>
-        <label for="CustomerType" for="customerTypeLabel" class="form-label">Customer Type</label>
+        <label for="customerTypeLabel" class="form-label">Customer Type</label>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
       {% csrf_token %}
