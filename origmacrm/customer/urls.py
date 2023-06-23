@@ -7,16 +7,18 @@ app_name = "customer"
 urlpatterns = [
     path("dashboard/", views.CustomerListView.as_view(), name="dashboard"),
     path(
-        "customer-update/<int:pk>",
+        "customer-update/<str:uuid>",
         views.CustomerUpdateView.as_view(),
         name="customer_update",
     ),
     path(
-        "customer/<int:pk>/", views.CustomerDetailView.as_view(), name="customer_detail"
+        "customer/<str:uuid>/",
+        views.CustomerDetailView.as_view(),
+        name="customer_detail",
     ),
     path("customer/", views.CustomerCreateView.as_view(), name="customer_create"),
     path(
-        "address-update/<int:pk>",
+        "address-update/<str:uuid>",
         views.AddressUpdateView.as_view(),
         name="address_update",
     ),
