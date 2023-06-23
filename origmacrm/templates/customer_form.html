@@ -61,12 +61,6 @@
         <label for="endDateLabel" class="form-label">End Date</label>
       </div>
       <div class="mb-3 form-floating">
-        <input type="text" class="form-control" id="createdByLabel"
-        placeholder="Created By"
-        {% if is_update_view %}value="{{ customer.created_by | upper}}"{% endif %}/>
-        <label for="createdByLabel" class="form-label">Created By</label>
-      </div>
-      <div class="mb-3 form-floating">
         <input type="text" class="form-control" id="activeFlagLabel"
         placeholder="Active"
         {% if is_update_view %}value="{{ customer.active | upper}}"{% endif %}/>
