@@ -5,30 +5,31 @@
 
   <div class="container w-50" >
 
-    {% if create_customer %}
+    {% if is_update_view %}
     <h2 class="mb-3">Create Customer</h2>
     {% else %}
     <h2 class="mb-3">Update Customer</h2>
     {% endif %}
+
 
     <form method="POST" class="p2">
       <div class="mb-3 form-floating">
         <input type="text" class="form-control"
           id="dbaFormLabel"
           placeholder="DBA"
-          {% if not create_customer %}value="{{ customer.dba | upper}}"{% endif %}/>
+          {% if is_update_view %}value="{{ customer.dba | upper}}"{% endif %}/>
         <label for="dbaFormLabel" class="form-label">DBA</label>
       </div>
       <div class="mb-3 form-floating">
         <input type="text" class="form-control"
         id="nameFormLabel"
         placeholder="Legal Business Name"
-        {% if not create_customer %}value="{{ customer.name | upper}}"{% endif %}/>
+        {% if is_update_view %}value="{{ customer.name | upper}}"{% endif %}/>
         <label for="nameFormLabel" class="form-label">Legal Business Name</label>
       </div>
       <div class="mb-3 form-floating">
         <select  class="form-control" id="billingFormLabel">
-          <option {% if create_customer %}value="" {% else %}value="{{ customer.billing_address | upper}}"{% endif %}>{{customer.billing_address}}</option>
+          <option {% if is_update_view %} value="{{ customer.billing_address | upper}}" {% else %} value="" {% endif %}>{{customer.billing_address}}</option>
           {% for address in address_list %}
             <option value="{{ address | upper}}">{{address}}</option>
           {% endfor %}
@@ -38,7 +39,7 @@
       <div class="mb-3 form-floating">
         <select  class="form-control" id="shippingFormLabel">
 
-          <option {% if create_customer %}value="" {% else %} value="{{ customer.shipping_address | upper}}" {% endif %}>{{customer.shipping_address}}</option>
+          <option {% if is_update_view %} value="{{ customer.shipping_address | upper}}" {% else %} value="" {% endif %}>{{customer.shipping_address}}</option>
 
           {% for address in address_list %}
             <option value="{{ address | upper}}">{{address}}</option>
@@ -50,32 +51,32 @@
       <div class="mb-3 form-floating">
         <input type="text" class="form-control" id="startDateLabel"
         placeholder="Start Date"
-        {% if not create_customer %}value="{{ customer.start_date }}"{% endif %}/>
+        {% if is_update_view %}value="{{ customer.start_date }}"{% endif %}/>
         <label for="startDateLabel" class="form-label">Start Date</label>
       </div>
       <div class="mb-3 form-floating">
         <input type="text" class="form-control" id="endDateLabel"
         placeholder="End Date"
-        {% if not create_customer %}value="{{ customer.end_date }}"{% endif %}/>
+        {% if is_update_view %}value="{{ customer.end_date }}"{% endif %}/>
         <label for="endDateLabel" class="form-label">End Date</label>
       </div>
       <div class="mb-3 form-floating">
         <input type="text" class="form-control" id="createdByLabel"
         placeholder="Created By"
-        {% if not create_customer %}value="{{ customer.created_by | upper}}"{% endif %}/>
+        {% if is_update_view %}value="{{ customer.created_by | upper}}"{% endif %}/>
         <label for="createdByLabel" class="form-label">Created By</label>
       </div>
       <div class="mb-3 form-floating">
         <input type="text" class="form-control" id="activeFlagLabel"
         placeholder="Active"
-        {% if not create_customer %}value="{{ customer.active | upper}}"{% endif %}/>
+        {% if is_update_view %}value="{{ customer.active | upper}}"{% endif %}/>
         <label for="activeFlagLabel" class="form-label">Active</label>
       </div>
       <div class="mb-3 form-floating">
         <select  class="form-control" id="customerTypeLabel">
 
-          <option {% if create_customer %}value="" {% else %}
-          value="{{ customer.customer_type }}" {% endif %}>{{customer.customer_type | industry}}</option>
+          <option {% if is_update_view %} value="{{ customer.customer_type }}" {% else %}
+          value="" {% endif %}>{{customer.customer_type | industry}}</option>
 
           {% for type in customer_types %}
             <option value="{{ type }}">{{ type }}</option>

@@ -1,10 +1,10 @@
 from typing import Any, Dict
 
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.views.generic.base import TemplateView
 
+from .mixins import CustomerSingleObjectMixin
 from .models import Address, Customer
 
 
@@ -19,12 +19,12 @@ class CustomerListView(LoginRequiredMixin, ListView):
     # paginate_by = 10
 
 
-class CustomerDetailView(LoginRequiredMixin, DetailView):
+class CustomerDetailView(LoginRequiredMixin, CustomerSingleObjectMixin, DetailView):
     model = Customer
     template_name = "customer_detail.html"
 
 
-class CustomerCreateView(LoginRequiredMixin, CreateView):
+class CustomerCreateView(LoginRequiredMixin, CustomerSingleObjectMixin, CreateView):
     model = Customer
     template_name = "customer_form.html"
     fields = (
@@ -39,14 +39,8 @@ class CustomerCreateView(LoginRequiredMixin, CreateView):
         "customer_type",
     )
 
-    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
-        context = super().get_context_data(**kwargs)
-        context["create_customer"] = True
 
-        return context
-
-
-class CustomerUpdateView(LoginRequiredMixin, UpdateView):
+class CustomerUpdateView(LoginRequiredMixin, CustomerSingleObjectMixin, UpdateView):
     model = Customer
     template_name = "customer_form.html"
     fields = (
