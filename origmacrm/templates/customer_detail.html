@@ -1,7 +1,7 @@
 {% extends 'home.html' %}
 
 {% block body %}
-    <a href="{% url 'customer:customer_update' customer.id %}">Update Customer</a>
+    <a href="{% url 'customer:customer_update' customer.uuid %}">Update Customer</a>
     <table class="table">
         <tbody>
           <tr>
