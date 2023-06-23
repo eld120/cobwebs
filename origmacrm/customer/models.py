@@ -1,7 +1,9 @@
 import uuid
+from typing import Iterable, Optional
 
 from django.conf import settings
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 
@@ -19,7 +21,7 @@ class TimeStampModel(models.Model):
 
 
 class Customer(TimeStampModel):
-    INDUSTRY_OPTIONS = (
+    INDUSTRY_OPTIONS: tuple = (
         ("agriculture", "Agriculture"),
         ("arts entertainment", "Arts & Entertainment"),
         ("construction", "Construction"),
@@ -55,6 +57,14 @@ class Customer(TimeStampModel):
     def __str__(self) -> str:
         return f"{self.name} dba {self.dba}"
 
+    def save(self, request=None, *args, **kwargs) -> None:
+        if request:
+            self.created_by = request.user
+        super(Customer, self).save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse("customer_update", kwargs={"uuid": self.uuid})
+
 
 class Address(TimeStampModel):
     uuid = models.UUIDField(default=uuid.uuid4, editable=False)
@@ -67,4 +77,7 @@ class Address(TimeStampModel):
     email = models.CharField(max_length=50)
 
     def __str__(self) -> str:
-        return f"{self.address_1} {self.zip_code}"
+        return f"{self.address_1} {self.city} {self.state} {self.zip_code}"
+
+    def get_absolute_url(self):
+        return reverse("address_update", kwargs={"uuid": self.uuid})
