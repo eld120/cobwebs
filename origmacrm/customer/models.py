@@ -81,3 +81,8 @@ class Address(TimeStampModel):
 
     def get_absolute_url(self):
         return reverse("address_update", kwargs={"uuid": self.uuid})
+
+    def save(self, request=None, *args, **kwargs) -> None:
+        if request:
+            self.created_by = request.user
+        super(Address, self).save(*args, **kwargs)

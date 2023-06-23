@@ -34,7 +34,6 @@ class CustomerCreateView(LoginRequiredMixin, CustomerSingleObjectMixin, CreateVi
         "shipping_address",
         "start_date",
         "end_date",
-        "created_by",
         "active",
         "customer_type",
     )
@@ -50,7 +49,6 @@ class CustomerUpdateView(LoginRequiredMixin, CustomerSingleObjectMixin, UpdateVi
         "shipping_address",
         "start_date",
         "end_date",
-        "created_by",
         "active",
         "customer_type",
     )
@@ -70,7 +68,7 @@ class AddressCreateView(LoginRequiredMixin, CreateView):
     )
 
 
-class AddressUpdateView(LoginRequiredMixin, UpdateView):
+class AddressUpdateView(LoginRequiredMixin, CustomerSingleObjectMixin, UpdateView):
     model = Address
     template_name = "address_form.html"
     fields = (
