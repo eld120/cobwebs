@@ -1,6 +1,6 @@
 from django.views.generic.detail import SingleObjectMixin
 
-from .models import Address, Customer
+from .models import ACTIVE_OPTIONS, Address, Customer
 
 
 class CustomerSingleObjectMixin(SingleObjectMixin):
@@ -14,6 +14,7 @@ class CustomerSingleObjectMixin(SingleObjectMixin):
             "is_update_view": "update" in self.request.path,
             "address_list": Address.objects.all(),
             "customer_types": (type[1] for type in Customer.INDUSTRY_OPTIONS),
+            "active_flag": (type[1] for type in ACTIVE_OPTIONS),
         }
         context |= updates
         return context

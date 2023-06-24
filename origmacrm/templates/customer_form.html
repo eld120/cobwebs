@@ -6,9 +6,9 @@
   <div class="container w-50" >
 
     {% if is_update_view %}
-    <h2 class="mb-3">Create Customer</h2>
-    {% else %}
     <h2 class="mb-3">Update Customer</h2>
+    {% else %}
+    <h2 class="mb-3">Create Customer</h2>
     {% endif %}
 
 
@@ -36,6 +36,11 @@
         </select>
         <label for="billingFormLabel" class="form-label">Billing Address</label>
       </div>
+      <span>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createAddressModal">
+          Add Billing Address
+        </button>
+      </span>
       <div class="mb-3 form-floating">
         <select  class="form-control" id="shippingFormLabel">
 
@@ -48,22 +53,35 @@
         </select>
         <label for="shippingFormLabel" class="form-label">Shipping Address</label>
       </div>
+      <span>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createAddressModal">
+          Add Shipping Address
+        </button>
+      </span>
+
       <div class="mb-3 form-floating">
         <input type="text" class="form-control" id="startDateLabel"
         placeholder="Start Date"
-        {% if is_update_view %}value="{{ customer.start_date }}"{% endif %}/>
-        <label for="startDateLabel" class="form-label">Start Date</label>
+        {% if is_update_view %}value="{{ customer.start_date | date:'n/j/y' }}"{% endif %}/>
+        <label for="startDateLabel" class="form-label">Start Date (m/d/y)</label>
       </div>
       <div class="mb-3 form-floating">
         <input type="text" class="form-control" id="endDateLabel"
         placeholder="End Date"
-        {% if is_update_view %}value="{{ customer.end_date }}"{% endif %}/>
-        <label for="endDateLabel" class="form-label">End Date</label>
+        {% if is_update_view %}value="{{ customer.end_date | date:'n/j/y' }}"{% endif %}/>
+        <label for="endDateLabel" class="form-label">End Date (m/d/y)</label>
       </div>
       <div class="mb-3 form-floating">
-        <input type="text" class="form-control" id="activeFlagLabel"
-        placeholder="Active"
-        {% if is_update_view %}value="{{ customer.active | upper}}"{% endif %}/>
+        <select  class="form-control" id="activeFlagLabel">
+
+          <option {% if is_update_view %} value="{{ customer.active }}" {% else %}
+          value="" {% endif %}>{{customer.active | active_flag }}</option>
+
+          {% for status in active_flag %}
+            <option value="{{ status }}">{{ status }}</option>
+          {% endfor %}
+
+        </select>
         <label for="activeFlagLabel" class="form-label">Active</label>
       </div>
       <div class="mb-3 form-floating">
@@ -84,7 +102,7 @@
     </form>
   </div>
 
-
+{% include "address_form.html" %}
 
 
 {% endblock body %}

@@ -1,45 +1,53 @@
-{% extends 'home.html' %}
 
-{% block body %}
-  <div class="container w-50" >
 
-    {% if create_address %}
-      <h2>Create Address</h2>
-    {% else %}
-      <h2>Update Address</h2>
-    {% endif %}
-    <br>
-    <form method="POST" >
-      {% csrf_token %}
-      <div class="mb-3 form-floating">
-        <input type="text" class="form-control" id="addressOneInput">
-        <label for="addressOneInput">Address Line 1</label>
+
+<div class="modal fade" id="createAddressModal" tabindex="-1" aria-labelledby="createAddressModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        {% if is_update_view %}
+
+            <h4 class="modal-title fs-5">Update Address</h4>
+        {% else %}
+            <h4 class="modal-title fs-5">Create Address</h4>
+        {% endif %}
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="mb-3 form-floating" >
-        <input type="text" class="form-control" id="addressTwoInput">
-        <label for="addressTwoInput">Address Line 2</label>
+
+        <form method="POST" class="modal-body">
+          {% csrf_token %}
+          <div class="mb-3 form-floating">
+            <input type="text" class="form-control" id="addressOneInput">
+            <label for="addressOneInput">Address Line 1</label>
+          </div>
+          <div class="mb-3 form-floating" >
+            <input type="text" class="form-control" id="addressTwoInput">
+            <label for="addressTwoInput">Address Line 2</label>
+          </div>
+          <div class="mb-3 form-floating">
+            <input type="text" class="form-control" id="cityInput">
+            <label for="cityInput">City</label>
+          </div>
+          <div class="mb-3 form-floating">
+            <input type="text" class="form-control" id="stateInput">
+            <label for="stateInput">State</label>
+          </div>
+          <div class="mb-3 form-floating">
+            <input type="text" class="form-control" id="zipCodeInput">
+            <label for="zipCodeInput">Zip Code</label>
+          </div>
+          <div class="mb-3 form-floating">
+            <input type="text" class="form-control" id="phoneNumberInput">
+            <label for="phoneNumberInput">Phone Number</label>
+          </div>
+          <div class="mb-3 form-floating">
+            <input type="text" class="form-control" id="emailInput">
+            <label for="emailInput">Email</label>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
       </div>
-      <div class="mb-3 form-floating">
-        <input type="text" class="form-control" id="cityInput">
-        <label for="cityInput">City</label>
-      </div>
-      <div class="mb-3 form-floating">
-        <input type="text" class="form-control" id="stateInput">
-        <label for="stateInput">State</label>
-      </div>
-      <div class="mb-3 form-floating">
-        <input type="text" class="form-control" id="zipCodeInput">
-        <label for="zipCodeInput">Zip Code</label>
-      </div>
-      <div class="mb-3 form-floating">
-        <input type="text" class="form-control" id="phoneNumberInput">
-        <label for="phoneNumberInput">Phone Number</label>
-      </div>
-      <div class="mb-3 form-floating">
-        <input type="text" class="form-control" id="emailInput">
-        <label for="emailInput">Email</label>
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    </div>
+  </div>
 </div>
-{% endblock body %}
