@@ -17,14 +17,15 @@
         <input type="text" class="form-control"
           id="dbaFormLabel"
           placeholder="DBA"
-          {% if is_update_view %}value="{{ customer.dba | upper}}"{% endif %}/>
+          {% if is_update_view %}value="{{ customer.dba | upper}}"{% endif %}>
         <label for="dbaFormLabel" class="form-label">DBA</label>
       </div>
       <div class="mb-3 form-floating">
+
         <input type="text" class="form-control"
         id="nameFormLabel"
         placeholder="Legal Business Name"
-        {% if is_update_view %}value="{{ customer.name | upper}}"{% endif %}/>
+        {% if is_update_view %}value="{{ customer.name | upper}}"{% endif %}>
         <label for="nameFormLabel" class="form-label">Legal Business Name</label>
       </div>
       <div class="mb-3 form-floating">
@@ -37,14 +38,15 @@
         <label for="billingFormLabel" class="form-label">Billing Address</label>
       </div>
       <span>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createAddressModal">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createAddressModal"
+        @click="">
           Add Billing Address
         </button>
       </span>
       <div class="mb-3 form-floating">
         <select  class="form-control" id="shippingFormLabel">
 
-          <option {% if is_update_view %} value="{{ customer.shipping_address | upper}}" {% else %} value="" {% endif %}>{{customer.shipping_address}}</option>
+          <option {% if is_update_view %} value="{{ customer.shipping_address | upper }}" {% else %} value="" {% endif %}>{{customer.shipping_address}}</option>
 
           {% for address in address_list %}
             <option value="{{ address | upper}}">{{address}}</option>
@@ -62,13 +64,13 @@
       <div class="mb-3 form-floating">
         <input type="text" class="form-control" id="startDateLabel"
         placeholder="Start Date"
-        {% if is_update_view %}value="{{ customer.start_date | date:'n/j/y' }}"{% endif %}/>
+        {% if is_update_view %}value="{{ customer.start_date | date:'n/j/y' }}"{% endif %}>
         <label for="startDateLabel" class="form-label">Start Date (m/d/y)</label>
       </div>
       <div class="mb-3 form-floating">
         <input type="text" class="form-control" id="endDateLabel"
         placeholder="End Date"
-        {% if is_update_view %}value="{{ customer.end_date | date:'n/j/y' }}"{% endif %}/>
+        {% if is_update_view %}value="{{ customer.end_date | date:'n/j/y' }}"{% endif %}>
         <label for="endDateLabel" class="form-label">End Date (m/d/y)</label>
       </div>
       <div class="mb-3 form-floating">
