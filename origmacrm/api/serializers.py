@@ -3,11 +3,25 @@ from rest_framework import serializers
 from user.models import User
 
 
+class CustomerSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Address
+        fields = (
+            "dba",
+            "name",
+            "billing_address",
+            "shipping_address",
+            "start_date",
+            "end_date",
+            "active",
+            "customer_type",
+        )
+
+
 class AddressSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Address
         fields = (
-            "uuid",
             "address_1",
             "address_2",
             "city",
@@ -16,7 +30,6 @@ class AddressSerializer(serializers.HyperlinkedModelSerializer):
             "email",
             "start_date",
             "end_date",
-            "created_by",
         )
 
 
