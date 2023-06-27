@@ -13,7 +13,6 @@ class CustomerForm(forms.ModelForm):
             "shipping_address",
             "start_date",
             "end_date",
-            "created_by",
             "active",
             "customer_type",
         )
@@ -31,5 +30,4 @@ class AddressForm(forms.ModelForm):
             "email",
             "start_date",
             "end_date",
-            "created_by",
         )

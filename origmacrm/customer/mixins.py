@@ -6,6 +6,8 @@ from .models import ACTIVE_OPTIONS, Address, Customer
 class CustomerSingleObjectMixin(SingleObjectMixin):
     def get_object(self):
         uuid = self.kwargs["uuid"]
+        if "address" in self.request.path:
+            return Address.objects.get(uuid=uuid)
         return Customer.objects.get(uuid=uuid)
 
     def get_context_data(self, **kwargs):
