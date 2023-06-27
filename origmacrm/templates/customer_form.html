@@ -39,8 +39,9 @@
       </div>
       <span>
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createAddressModal"
-        @click="">
-          Add Billing Address
+        id="billingAddressButton"
+        >
+          {% if is_update_view %}Update{% else %}Add{% endif %} Billing Address
         </button>
       </span>
       <div class="mb-3 form-floating">
@@ -56,8 +57,9 @@
         <label for="shippingFormLabel" class="form-label">Shipping Address</label>
       </div>
       <span>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createAddressModal">
-          Add Shipping Address
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createAddressModal"
+        id="shippingAddressButton">
+        {% if is_update_view %}Update{% else %}Add{% endif %} Shipping Address
         </button>
       </span>
 
