@@ -14,7 +14,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
-        <form method="POST" class="modal-body">
+        <form method="POST" class="modal-body" id="addressForm">
           {% csrf_token %}
           <div class="mb-3 form-floating">
             <input type="text" class="form-control" id="addressOneInput"
