@@ -4,11 +4,17 @@ from user.models import User
 
 
 class CustomerSerializer(serializers.HyperlinkedModelSerializer):
-    billing_address = serializers.HyperlinkedIdentityField(
-        view_name="customer:address_update", lookup_field="uuid"
+    billing_address = serializers.HyperlinkedRelatedField(
+        view_name="api:address-detail",
+        lookup_field="uuid",
+        many=False,
+        queryset=Customer.objects.all(),
     )
-    shipping_address = serializers.HyperlinkedIdentityField(
-        view_name="customer:address_update", lookup_field="uuid"
+    shipping_address = serializers.HyperlinkedRelatedField(
+        view_name="api:address-detail",
+        lookup_field="uuid",
+        many=False,
+        queryset=Customer.objects.all(),
     )
 
     class Meta:

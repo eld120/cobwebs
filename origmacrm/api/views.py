@@ -14,10 +14,6 @@ class AddressViewset(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticated]
     lookup_field = "uuid"
 
-    # @action(detail=True, methods=['POST'], url_path='update-address', url_name='update_address')
-    # def update_address(self, request, uuid=None):
-    #     address = self.get_object()
-
 
 class CustomerViewset(viewsets.ModelViewSet):
     queryset = Customer.objects.all()
