@@ -1,43 +1,51 @@
 
+import { getAddressURL } from "./utils.js";
 
-// DOM URL
+
+
+// DOM
 const objectUUID = document.querySelector('#customerUUID')
-if (objectUUID != null){
-    custUUID = objectUUID.value
+
+const addressForm = document.querySelector("#addressForm")
 
     // event listeners on the DOM
+if (objectUUID != null){
+        let custUUID = objectUUID.value
+        Alpine.store()
 document
-.querySelector("#billingAddressButton")
-.addEventListener("click", ()=> getAddressData(custUUID, 'billing').then((data)=> console.log(data)));
+    .querySelector("#billingAddressButton")
+    .addEventListener("click", ()=> getAddressURL(custUUID, 'billing'));
 
 document
-.querySelector("#shippingAddressButton")
-.addEventListener("click", ()=> getAddressData(custUUID, 'billing').then((data)=> console.log(data)));
-//   .catch((error) => console.log(error));
+    .querySelector("#shippingAddressButton")
+    .addEventListener("click", ()=> getAddressURL(custUUID, 'shipping'));
+    //   .catch((error) => console.log(error));
 
 }
 
-async function getAddressData(url, type) {
-    let customerData = await axios.get('/api1/customers/'+ url).catch((error) => console.log(error))
+document.addEventListener('alpine:init', () => {
+    Alpine.store('addressData', {
+        addressOne: '',
+        addressTwo: '',
+        addressCity: '',
+        addressState: '',
+        addressZipCode: '',
+        addressPhone: '',
+        addressEmail: '',
+        })
+        }
+    )
 
 
-    return customerData.
-
-
-  }
-
-
-
-// document.querySelector("#addressForm").addEventListener('click', ()=> console.log("FOUND IT"))
 
 // document.querySelector("#addressForm").addEventListener('submit',
 //     (formData) => formData.preventDefault() )
 
-async function getAddress(url) {
-  let addressData = await axios
-    .get(url)
-    .then((res) => console.log(res))
-    .catch((err) => console.log(err));
+// async function getAddress(url) {
+//   let addressData = await axios
+//     .get(url)
+//     .then((res) => console.log(res))
+//     .catch((err) => console.log(err));
 
   // return{
   // 'addressOne': addressData.address_1,
@@ -48,7 +56,7 @@ async function getAddress(url) {
   // 'phoneNumber' : addressData.phone,
   // 'emailAddress' : addressData.email,
   // }
-}
+// }
 
 // document.addEventListener("alpine:init", () => {
 //   Alpine.store( 'addressData' , {

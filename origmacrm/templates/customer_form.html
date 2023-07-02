@@ -58,7 +58,8 @@
       </div>
       <span>
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createAddressModal"
-        id="shippingAddressButton">
+        id="shippingAddressButton"
+        >
         {% if is_update_view %}Update{% else %}Add{% endif %} Shipping Address
         </button>
       </span>
@@ -104,6 +105,7 @@
       <button type="submit" class="btn btn-primary">Submit</button>
       {% csrf_token %}
       <input type="hidden" name="customerUUID" id="customerUUID" value="{{ customer.uuid }}">
+      <!-- <input type="hidden" > -->
     </form>
   </div>
 

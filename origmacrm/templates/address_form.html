@@ -5,44 +5,63 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
+
         {% if is_update_view %}
 
             <h4 class="modal-title fs-5">Update Address</h4>
         {% else %}
             <h4 class="modal-title fs-5">Create Address</h4>
         {% endif %}
+
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
-        <form method="POST" class="modal-body" id="addressForm">
+        <form method="POST" class="modal-body" id="addressForm"
+          x-init="Alpine.store('addressData', {
+            addressOne: '',
+            addressTwo: '',
+            addressCity: '',
+            addressState: '',
+            addressZipCode: '',
+            addressPhone: '',
+            addressEmail: '',
+            })">
           {% csrf_token %}
           <div class="mb-3 form-floating">
-            <input type="text" class="form-control" id="addressOneInput"
-            >
+            <input type="text" class="form-control" id="addressOneInput" x-data
+            :value="$store.addressData?.addressOne">
+
             <label for="addressOneInput">Address Line 1</label>
           </div>
           <div class="mb-3 form-floating" >
-            <input type="text" class="form-control" id="addressTwoInput">
+            <input type="text" class="form-control" id="addressTwoInput" x-data
+            :value="$store.addressData?.addressTwo"
+           >
             <label for="addressTwoInput">Address Line 2</label>
           </div>
           <div class="mb-3 form-floating">
-            <input type="text" class="form-control" id="cityInput">
+            <input type="text" class="form-control" id="cityInput" x-data
+            :value="$store.addressData?.addressCity">
             <label for="cityInput">City</label>
           </div>
           <div class="mb-3 form-floating">
-            <input type="text" class="form-control" id="stateInput">
+            <input type="text" class="form-control" id="stateInput"
+            x-data :value="$store.addressData?.addressState">
             <label for="stateInput">State</label>
           </div>
           <div class="mb-3 form-floating">
-            <input type="text" class="form-control" id="zipCodeInput">
+            <input type="text" class="form-control" id="zipCodeInput"
+            x-data :value="$store.addressData?.addressZipCode">
             <label for="zipCodeInput">Zip Code</label>
           </div>
           <div class="mb-3 form-floating">
-            <input type="text" class="form-control" id="phoneNumberInput">
+            <input type="text" class="form-control" id="phoneNumberInput"
+            x-data :value="$store.addressData?.addressPhone">
             <label for="phoneNumberInput">Phone Number</label>
           </div>
           <div class="mb-3 form-floating">
-            <input type="text" class="form-control" id="emailInput">
+            <input type="text" class="form-control" id="emailInput"
+            x-data :value="$store.addressData?.addressEmail">
             <label for="emailInput">Email</label>
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
