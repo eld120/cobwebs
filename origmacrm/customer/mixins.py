@@ -21,6 +21,10 @@ class CustomerSingleObjectMixin(SingleObjectMixin):
         context |= updates
         return context
 
+    def form_valid(self, form):
+        form.instance.created_by = self.request.user
+        return super().form_valid(form)
+
 
 # class CustomerFormDataMixin:
 #     '''temporarily retiring this mixin as it may be redundant'''

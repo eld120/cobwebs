@@ -17,6 +17,27 @@ class CustomerForm(forms.ModelForm):
             "customer_type",
         )
 
+    # def form_valid(self, form):
+    #     customer_form = form.save(commit=False)
+    #     customer_form.created_by = self.request.user
+    #     customer_form.save()
+    #     return super(CustomerForm, self ).form_valid(form)
+
+    # def __init__(self, *args, **kwargs):
+    #     self.request = kwargs.pop('request')
+    #     super(CustomerForm, self).__init__(*args, **kwargs)
+    #     self.fields['created_by'].queryset = Customer.objects.filter(user=self.request.user)
+
+    # def save(self, *args, **kwargs):
+    #     kwargs['commit']=False
+
+    #     customer_form = super(CustomerForm, self).save(*args, **kwargs)
+    #     print(f"{self.request}")
+    #     if self.request:
+    #         customer_form.created_by = self.request.user
+    #     customer_form.save()
+    #     return customer_form
+
 
 class AddressForm(forms.ModelForm):
     class Meta:

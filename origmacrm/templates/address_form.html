@@ -17,6 +17,7 @@
       </div>
 
         <form method="POST" class="modal-body" id="addressForm"
+        {% comment %} @submit.prevent="" {% endcomment %}
           x-init="Alpine.store('addressData', {
             addressOne: '',
             addressTwo: '',

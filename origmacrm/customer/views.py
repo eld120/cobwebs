@@ -1,9 +1,12 @@
 from typing import Any, Dict
 
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.forms.models import BaseModelForm
+from django.http import HttpResponse
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.views.generic.base import TemplateView
 
+from .forms import CustomerForm
 from .mixins import CustomerSingleObjectMixin
 from .models import Address, Customer
 
@@ -25,33 +28,13 @@ class CustomerDetailView(LoginRequiredMixin, CustomerSingleObjectMixin, DetailVi
 
 
 class CustomerCreateView(LoginRequiredMixin, CustomerSingleObjectMixin, CreateView):
-    model = Customer
+    form_class = CustomerForm
     template_name = "customer_form.html"
-    fields = (
-        "dba",
-        "name",
-        "billing_address",
-        "shipping_address",
-        "start_date",
-        "end_date",
-        "active",
-        "customer_type",
-    )
 
 
 class CustomerUpdateView(LoginRequiredMixin, CustomerSingleObjectMixin, UpdateView):
-    model = Customer
+    form_class = CustomerForm
     template_name = "customer_form.html"
-    fields = (
-        "dba",
-        "name",
-        "billing_address",
-        "shipping_address",
-        "start_date",
-        "end_date",
-        "active",
-        "customer_type",
-    )
 
 
 class AddressCreateView(LoginRequiredMixin, CreateView):
