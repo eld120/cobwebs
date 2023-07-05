@@ -1,9 +1,15 @@
+import uuid
+from typing import Iterable, Optional
+
 from django.conf import settings
 from django.db import models
+from django.urls import reverse
 
-# Create your models here.
-
-ACTIVE_OPTIONS = (("active", "Active"), ("active", "Inactive"), ("active", "Archived"))
+ACTIVE_OPTIONS = (
+    ("active", "Active"),
+    ("inactive", "Inactive"),
+    ("archived", "Archived"),
+)
 
 
 class TimeStampModel(models.Model):
@@ -36,7 +42,7 @@ class Customer(TimeStampModel):
         ("utilities", "Utilities"),
         ("wholesale", "Wholesale"),
     )
-
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False)
     dba = models.CharField(max_length=50)
     name = models.CharField(max_length=50)
     billing_address = models.ForeignKey(
@@ -53,8 +59,12 @@ class Customer(TimeStampModel):
     def __str__(self) -> str:
         return f"{self.name} dba {self.dba}"
 
+    def get_absolute_url(self):
+        return reverse("customer:customer_update", kwargs={"uuid": self.uuid})
+
 
 class Address(TimeStampModel):
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False)
     address_1 = models.CharField(max_length=100)
     address_2 = models.CharField(max_length=100)
     city = models.CharField(max_length=50)
@@ -64,4 +74,12 @@ class Address(TimeStampModel):
     email = models.CharField(max_length=50)
 
     def __str__(self) -> str:
-        return f"{self.address_1} {self.zip_code}"
+        return f"{self.address_1} {self.city} {self.state} {self.zip_code}"
+
+    def get_absolute_url(self):
+        return reverse("customer:address_update", kwargs={"uuid": self.uuid})
+
+    def save(self, request=None, *args, **kwargs) -> None:
+        if request:
+            self.created_by = request.user
+        super(Address, self).save(*args, **kwargs)

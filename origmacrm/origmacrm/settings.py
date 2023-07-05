@@ -47,11 +47,15 @@ INSTALLED_APPS = [
     "user",
     "django_htmx",
     "debug_toolbar",
+    "rest_framework",
+    "corsheaders",
+    "api",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -149,3 +153,9 @@ LOGIN_REDIRECT_URL = "customer:dashboard"
 LOGOUT_REDIRECT_URL = "customer:home"
 
 LOGIN_URL = "user/login/"
+
+
+REST_FRAMEWORK = {
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 10,
+}

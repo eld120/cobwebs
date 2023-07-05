@@ -1,10 +1,13 @@
 from typing import Any, Dict
 
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
+from django.forms.models import BaseModelForm
+from django.http import HttpResponse
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.views.generic.base import TemplateView
 
+from .forms import CustomerForm
+from .mixins import CustomerSingleObjectMixin
 from .models import Address, Customer
 
 
@@ -19,47 +22,19 @@ class CustomerListView(LoginRequiredMixin, ListView):
     # paginate_by = 10
 
 
-class CustomerDetailView(LoginRequiredMixin, DetailView):
+class CustomerDetailView(LoginRequiredMixin, CustomerSingleObjectMixin, DetailView):
     model = Customer
     template_name = "customer_detail.html"
 
 
-class CustomerCreateView(LoginRequiredMixin, CreateView):
-    model = Customer
+class CustomerCreateView(LoginRequiredMixin, CustomerSingleObjectMixin, CreateView):
+    form_class = CustomerForm
     template_name = "customer_form.html"
-    fields = (
-        "dba",
-        "name",
-        "billing_address",
-        "shipping_address",
-        "start_date",
-        "end_date",
-        "created_by",
-        "active",
-        "customer_type",
-    )
-
-    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
-        context = super().get_context_data(**kwargs)
-        context["create_customer"] = True
-
-        return context
 
 
-class CustomerUpdateView(LoginRequiredMixin, UpdateView):
-    model = Customer
+class CustomerUpdateView(LoginRequiredMixin, CustomerSingleObjectMixin, UpdateView):
+    form_class = CustomerForm
     template_name = "customer_form.html"
-    fields = (
-        "dba",
-        "name",
-        "billing_address",
-        "shipping_address",
-        "start_date",
-        "end_date",
-        "created_by",
-        "active",
-        "customer_type",
-    )
 
 
 class AddressCreateView(LoginRequiredMixin, CreateView):
@@ -76,7 +51,7 @@ class AddressCreateView(LoginRequiredMixin, CreateView):
     )
 
 
-class AddressUpdateView(LoginRequiredMixin, UpdateView):
+class AddressUpdateView(LoginRequiredMixin, CustomerSingleObjectMixin, UpdateView):
     model = Address
     template_name = "address_form.html"
     fields = (

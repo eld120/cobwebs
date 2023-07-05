@@ -9,11 +9,13 @@ crispy-bootstrap5==0.7
 dill==0.3.6
 distlib==0.3.6
 Django==4.2.2
+django-cors-headers==4.1.0
 django-coverage-plugin==3.0.0
 django-crispy-forms==2.0
 django-debug-toolbar==4.1.0
 django-environ==0.10.0
 django-htmx==1.14.0
+djangorestframework==3.14.0
 filelock==3.12.1
 flake8==6.0.0
 flake8-isort==6.0.0
@@ -21,6 +23,7 @@ identify==2.5.24
 iniconfig==2.0.0
 isort==5.12.0
 lazy-object-proxy==1.9.0
+Markdown==3.4.3
 mccabe==0.7.0
 mypy==1.3.0
 mypy-extensions==1.0.0
@@ -38,6 +41,7 @@ pylint-plugin-utils==0.8.2
 pytest==7.3.2
 pytest-django==4.5.2
 pytest-sugar==0.9.7
+pytz==2023.3
 PyYAML==6.0
 sqlparse==0.4.4
 termcolor==2.3.0
