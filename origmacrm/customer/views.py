@@ -34,7 +34,7 @@ class CustomerCreateView(LoginRequiredMixin, CustomerSingleObjectMixin, CreateVi
 
 class CustomerUpdateView(LoginRequiredMixin, CustomerSingleObjectMixin, UpdateView):
     form_class = CustomerForm
-    template_name = "customer_form.html"
+    template_name = "customer_test_form.html"
 
 
 class AddressCreateView(LoginRequiredMixin, CreateView):
