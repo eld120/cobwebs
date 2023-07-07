@@ -1,41 +1,35 @@
-
 import { getAddressURL } from "./utils.js";
 
-
-
 // DOM
-const objectUUID = document.querySelector('#customerUUID')
+const objectUUID = document.querySelector("#customerUUID");
+const updateTag = document.querySelector("#updateTag")
+const addAddressBtn = document.querySelectorAll(".add-btn")
+const addressModal = document.querySelector('#createAddressModal')
+const addressForm = document.querySelector("#addressForm");
 
-const addressForm = document.querySelector("#addressForm")
+// event listeners on the DOM
+if (objectUUID != null && updateTag != null) {
+  let custUUID = objectUUID.value;
 
-    // event listeners on the DOM
-if (objectUUID != null){
-        let custUUID = objectUUID.value
-        Alpine.store()
-document
+  document
     .querySelector("#billingAddressButton")
-    .addEventListener("click", ()=> getAddressURL(custUUID, 'billing'));
+    .addEventListener("click", () => getAddressURL(custUUID, "billing"));
 
-document
+  document
     .querySelector("#shippingAddressButton")
-    .addEventListener("click", ()=> getAddressURL(custUUID, 'shipping'));
-    //   .catch((error) => console.log(error));
-
+    .addEventListener("click", () => getAddressURL(custUUID, "shipping"));
 }
+addAddressBtn.forEach((element) => {
+    element.addEventListener("click", ()=> {
 
-document.addEventListener('alpine:init', () => {
-    Alpine.store('addressData', {
-        addressOne: '',
-        addressTwo: '',
-        addressCity: '',
-        addressState: '',
-        addressZipCode: '',
-        addressPhone: '',
-        addressEmail: '',
-        })
-        }
-    )
 
+    })
+});
+
+// event resetting address model on close
+addressModal.addEventListener('hidden.bs.modal', ()=>{
+    addressForm.reset()
+  })
 
 
 // document.querySelector("#addressForm").addEventListener('submit',
@@ -47,15 +41,15 @@ document.addEventListener('alpine:init', () => {
 //     .then((res) => console.log(res))
 //     .catch((err) => console.log(err));
 
-  // return{
-  // 'addressOne': addressData.address_1,
-  // 'addressTwo' : addressData.address_2 ,
-  // 'city' : addressData.city,
-  // 'state' :  addressData.state,
-  // 'zipCode' : addressData.zip_code,
-  // 'phoneNumber' : addressData.phone,
-  // 'emailAddress' : addressData.email,
-  // }
+// return{
+// 'addressOne': addressData.address_1,
+// 'addressTwo' : addressData.address_2 ,
+// 'city' : addressData.city,
+// 'state' :  addressData.state,
+// 'zipCode' : addressData.zip_code,
+// 'phoneNumber' : addressData.phone,
+// 'emailAddress' : addressData.email,
+// }
 // }
 
 // document.addEventListener("alpine:init", () => {

@@ -1,7 +1,7 @@
 from crispy_bootstrap5.bootstrap5 import FloatingField
 from crispy_forms.bootstrap import Modal, StrictButton
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Div, Layout, Row
+from crispy_forms.layout import Div, Layout, Row, Submit
 from django import forms
 from django.contrib.admin.widgets import AdminDateWidget
 
@@ -19,44 +19,45 @@ class CustomerForm(forms.ModelForm):
                 Div(
                     FloatingField("billing_address"),
                     StrictButton(
-                        "➕",
-                        css_class="btn-tertiary input-group-text",
+                        "",
+                        css_class="btn-tertiary input-group-text add-btn",
+                        data_bs_toggle="modal",
+                        data_bs_target="#createAddressModal",
+                    ),
+                    StrictButton(
+                        "",
+                        css_class="btn-tertiary input-group-text edit-btn",
+                        css_id="billingAddressButton",
+                        data_bs_toggle="modal",
+                        data_bs_target="#createAddressModal",
                     ),
                     css_class="input-group input-group-sm mb-2",
-                    data_bs_toggle="modal",
-                    data_bs_target="#createAddressModal",
                 )
             ),
             Row(
                 Div(
                     FloatingField("shipping_address"),
                     StrictButton(
-                        "➕",
-                        css_class="btn-tertiary input-group-text",
+                        "",
+                        css_class="btn-tertiary input-group-text add-btn",
+                        data_bs_toggle="modal",
+                        data_bs_target="#createAddressModal",
+                    ),
+                    StrictButton(
+                        "",
+                        css_class="btn-tertiary input-group-text edit-btn",
+                        css_id="shippingAddressButton",
+                        data_bs_toggle="modal",
+                        data_bs_target="#createAddressModal",
                     ),
                     css_class="input-group input-group-sm mb-2",
-                    data_bs_toggle="modal",
-                    data_bs_target="#createAddressModal",
                 )
             ),
             FloatingField("start_date"),
             FloatingField("end_date"),
             FloatingField("active"),
             FloatingField("customer_type"),
-            # Modal(
-            #     FloatingField('address_1'),
-            #     FloatingField('address_2'),
-            #     FloatingField('city'),
-            #     FloatingField('state'),
-            #     FloatingField('zip_code'),
-            #     FloatingField('phone'),
-            #     FloatingField('email'),
-            #     FloatingField('start_date'),
-            #     FloatingField('end_date'),
-            #     # we weant to prevent the submission of the modal/form on submit
-            #     StrictButton("submit", "Submit", css_class="btn btn-primary")
-            # ),
-            StrictButton("submit", "Submit", css_class="btn btn-primary"),
+            StrictButton("Submit", css_class="btn-primary", type="submit"),
         )
 
     class Meta:

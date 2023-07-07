@@ -71,5 +71,20 @@ select {
     scroll-behavior: auto !important;
   }
 }
+.edit-btn {
+  background-image: url(../svg/edit_FILL0_wght400_GRAD0_opsz24.svg);
+  background-repeat: no-repeat;
+  min-width: 1.5em;
+  background-position: center;
+  margin: 0 0.75em;
+}
+
+.add-btn {
+  background-image: url(../svg/add_FILL0_wght400_GRAD0_opsz24.svg);
+  background-repeat: no-repeat;
+  min-width: 1.5em;
+  margin: 0 auto;
+  background-position: center;
+}
 
 /*# sourceMappingURL=styles.css.map */
