@@ -1,4 +1,4 @@
-export { getAddressURL, getAddressData, submitAddressData };
+export { getAddressURL, getAddressData, submitAddressData, getCookie };
 
 async function getAddressURL(url, type) {
   let customerURL = await axios
@@ -28,10 +28,13 @@ async function getAddressData(url) {
   });
 }
 
-async function submitAddressData(url, dataObject, httpVerb) {
+async function submitAddressData(url, httpVerb) {
+  const dataObject = Alpine.store("addressData")
+
   if (httpVerb == "POST") {
     await axios
       .post(url, {
+        // csrf token
         address_1: dataObject.addressOne,
         address_2: dataObject.addressTwo,
         city: dataObject.addressCity,
@@ -39,7 +42,12 @@ async function submitAddressData(url, dataObject, httpVerb) {
         zip_code: dataObject.addressZipCode,
         phone: dataObject.addressPhone,
         email: dataObject.addressEmail,
-      })
+      },
+      {
+        headers:{'X-CSRFToken': getCookie('csrftoken')},
+        mode: 'same-origin'
+      }
+        )
       .catch((error) => console.log(error));
   } else {
     await axios
@@ -54,4 +62,19 @@ async function submitAddressData(url, dataObject, httpVerb) {
       })
       .catch((error) => console.log(error));
   }
+}
+
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+          }
+      }
+  }
+  return cookieValue;
 }
