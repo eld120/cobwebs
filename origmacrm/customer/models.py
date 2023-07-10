@@ -20,6 +20,7 @@ class TimeStampModel(models.Model):
         auto_now=False, auto_now_add=False, blank=True, null=True
     )
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    # active = models.CharField(choices=ACTIVE_OPTIONS, max_length=50)
 
 
 class Customer(TimeStampModel):
@@ -66,7 +67,7 @@ class Customer(TimeStampModel):
 class Address(TimeStampModel):
     uuid = models.UUIDField(default=uuid.uuid4, editable=False)
     address_1 = models.CharField(max_length=100)
-    address_2 = models.CharField(max_length=100)
+    address_2 = models.CharField(max_length=100, blank=True, null=True)
     city = models.CharField(max_length=50)
     state = models.CharField(max_length=50)
     zip_code = models.CharField(max_length=50)
