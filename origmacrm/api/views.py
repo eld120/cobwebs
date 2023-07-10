@@ -20,7 +20,7 @@ class AddressViewset(CustomerSingleObjectMixin, viewsets.ModelViewSet):
     lookup_field = "uuid"
 
 
-class CustomerViewset(CustomerSingleObjectMixin, viewsets.ModelViewSet):
+class CustomerViewset(viewsets.ModelViewSet):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
     authentication_classes = [

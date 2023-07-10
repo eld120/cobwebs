@@ -44,8 +44,6 @@ class AddressSerializer(serializers.HyperlinkedModelSerializer):
             "zip_code",
             "phone",
             "email",
-            "start_date",
-            "end_date",
         )
 
 
