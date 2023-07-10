@@ -12,30 +12,30 @@
     {% endif %}
 
 
-    <form method="POST" class="p2">
+    <form method="post" class="p2">
       <div class="mb-3 form-floating">
         <input type="text" class="form-control"
-          id="dbaFormLabel"
+          id="id_dba"
           placeholder="DBA"
           {% if is_update_view %}value="{{ customer.dba | upper}}"{% endif %}>
-        <label for="dbaFormLabel" class="form-label">DBA</label>
+        <label for="id_dba" class="form-label" >DBA</label>
       </div>
       <div class="mb-3 form-floating">
 
         <input type="text" class="form-control"
-        id="nameFormLabel"
+        id="id_name"
         placeholder="Legal Business Name"
         {% if is_update_view %}value="{{ customer.name | upper}}"{% endif %}>
-        <label for="nameFormLabel" class="form-label">Legal Business Name</label>
+        <label for="id_name" class="form-label">Legal Business Name</label>
       </div>
       <div class="mb-3 form-floating">
-        <select  class="form-control" id="billingFormLabel">
-          <option {% if is_update_view %} value="{{ customer.billing_address | upper}}" {% else %} value="" {% endif %}>{{customer.billing_address}}</option>
+        <select  class="form-control" id="id_billing_address">
+          <option {% if is_update_view %} value="{{ customer.billing_address.uuid }}" selected {% else %} value="" {% endif %}>{{customer.billing_address}}</option>
           {% for address in address_list %}
-            <option value="{{ address | upper}}">{{address}}</option>
+            <option value="{{ address.uuid }}">{{address}}</option>
           {% endfor %}
         </select>
-        <label for="billingFormLabel" class="form-label">Billing Address</label>
+        <label for="id_billing_address" class="form-label">Billing Address</label>
       </div>
       <span>
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createAddressModal"
@@ -45,16 +45,16 @@
         </button>
       </span>
       <div class="mb-3 form-floating">
-        <select  class="form-control" id="shippingFormLabel">
+        <select  class="form-control" id="id_shipping_address">
 
-          <option {% if is_update_view %} value="{{ customer.shipping_address | upper }}" {% else %} value="" {% endif %}>{{customer.shipping_address}}</option>
+          <option {% if is_update_view %} value="{{ customer.shipping_address.uuid }}" selected {% else %} value="" {% endif %}>{{customer.shipping_address}}</option>
 
           {% for address in address_list %}
-            <option value="{{ address | upper}}">{{address}}</option>
+            <option value="{{ address.uuid }}">{{address}}</option>
           {% endfor %}
 
         </select>
-        <label for="shippingFormLabel" class="form-label">Shipping Address</label>
+        <label for="id_shipping_address" class="form-label">Shipping Address</label>
       </div>
       <span>
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createAddressModal"
@@ -65,42 +65,42 @@
       </span>
 
       <div class="mb-3 form-floating">
-        <input type="text" class="form-control" id="startDateLabel"
+        <input type="text" class="form-control" id="id_start_date"
         placeholder="Start Date"
         {% if is_update_view %}value="{{ customer.start_date | date:'n/j/y' }}"{% endif %}>
-        <label for="startDateLabel" class="form-label">Start Date (m/d/y)</label>
+        <label for="id_start_date" class="form-label">Start Date (m/d/y)</label>
       </div>
       <div class="mb-3 form-floating">
-        <input type="text" class="form-control" id="endDateLabel"
+        <input type="text" class="form-control" id="id_end_date"
         placeholder="End Date"
         {% if is_update_view %}value="{{ customer.end_date | date:'n/j/y' }}"{% endif %}>
-        <label for="endDateLabel" class="form-label">End Date (m/d/y)</label>
+        <label for="id_end_date" class="form-label">End Date (m/d/y)</label>
       </div>
       <div class="mb-3 form-floating">
-        <select  class="form-control" id="activeFlagLabel">
+        <select  class="form-control" id="id_active">
 
-          <option {% if is_update_view %} value="{{ customer.active }}" {% else %}
+          <option {% if is_update_view %} value="{{ customer.active }}" selected {% else %}
           value="" {% endif %}>{{customer.active | active_flag }}</option>
 
           {% for status in active_flag %}
-            <option value="{{ status }}">{{ status }}</option>
+            <option value="{{ status | lower }}">{{ status }}</option>
           {% endfor %}
 
         </select>
-        <label for="activeFlagLabel" class="form-label">Active</label>
+        <label for="id_active" class="form-label">Active</label>
       </div>
       <div class="mb-3 form-floating">
-        <select  class="form-control" id="customerTypeLabel">
+        <select  class="form-control" id="id_customer_type">
 
-          <option {% if is_update_view %} value="{{ customer.customer_type }}" {% else %}
+          <option {% if is_update_view %} value="{{ customer.customer_type }}" selected {% else %}
           value="" {% endif %}>{{customer.customer_type | industry}}</option>
 
           {% for type in customer_types %}
-            <option value="{{ type }}">{{ type }}</option>
+            <option value="{{ type | lower }}">{{ type }}</option>
           {% endfor %}
 
         </select>
-        <label for="customerTypeLabel" class="form-label">Customer Type</label>
+        <label for="id_customer_type" class="form-label">Customer Type</label>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
       {% csrf_token %}
