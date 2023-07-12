@@ -3,11 +3,6 @@ import { getAddressURL, getCookie, submitAddressData } from "./utils.js";
 // DOM
 const objectUUID = document.querySelector("#customerUUID");
 const updateTag = document.querySelector("#updateTag")
-const addAddressBtn = document.querySelectorAll(".add-btn")
-const addressModal = document.querySelector('#createAddressModal')
-const addressForm = document.querySelector("#addressForm");
-const addressButton = document.querySelector('#addressFormSubmit');
-const csrftoken = getCookie('csrftoken');
 
 // event listeners on the DOM
 if (objectUUID != null && updateTag != null) {
@@ -21,12 +16,11 @@ if (objectUUID != null && updateTag != null) {
     .querySelector("#shippingAddressButton")
     .addEventListener("click", () => getAddressURL(custUUID, "shipping"));
 }
-// addAddressBtn.forEach((element) => {
-//     element.addEventListener("click", ()=> {
 
 
-//     })
-// });
+const addressModal = document.querySelector('#createAddressModal')
+const addressForm = document.querySelector("#addressForm");
+const addressButton = document.querySelector('#addressFormSubmit');
 
 // event resetting address model on close
 addressModal.addEventListener('hidden.bs.modal', ()=>{
