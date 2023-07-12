@@ -1,8 +1,8 @@
 import { getAddressURL, getCookie, submitAddressData } from "./utils.js";
 
-// DOM
+// Customer id/uuid DOM element and Create/Update flag
 const objectUUID = document.querySelector("#customerUUID");
-const updateTag = document.querySelector("#updateTag")
+const updateTag = document.querySelector("#updateFlag")
 
 // event listeners on the DOM
 if (objectUUID != null && updateTag != null) {
@@ -17,7 +17,7 @@ if (objectUUID != null && updateTag != null) {
     .addEventListener("click", () => getAddressURL(custUUID, "shipping"));
 }
 
-
+// address Modal and form DOM elements
 const addressModal = document.querySelector('#createAddressModal')
 const addressForm = document.querySelector("#addressForm");
 const addressButton = document.querySelector('#addressFormSubmit');
