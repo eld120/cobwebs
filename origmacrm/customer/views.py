@@ -13,7 +13,7 @@ from .models import Address, Customer
 
 # Create your views here.
 class HomePage(TemplateView):
-    template_name = "home.html"
+    template_name = "index.html"
 
 
 class CustomerListView(LoginRequiredMixin, ListView):

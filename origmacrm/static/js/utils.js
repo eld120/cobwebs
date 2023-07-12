@@ -48,6 +48,7 @@ async function submitAddressData(url, httpVerb) {
         mode: 'same-origin'
       }
         )
+        // need error handling
       .catch((error) => console.log(error));
   } else {
     await axios
