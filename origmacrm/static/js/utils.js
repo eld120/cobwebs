@@ -1,4 +1,4 @@
-export { getAddressURL, getAddressData, submitAddressData, getCookie };
+export { getAddressURL, getAddressData, submitAddressData, validateFormButton };
 
 async function getAddressURL(url, type) {
   let customerURL = await axios
@@ -78,4 +78,14 @@ function getCookie(name) {
       }
   }
   return cookieValue;
+}
+
+function validateFormButton(formElement, buttonElement){
+  console.log('inside the function')
+  let requiredInputs = formElement.querySelectorAll("[required]");
+  let emptyInputs = [...requiredInputs].filter(ele => ele.value.trim() == "");
+  if (emptyInputs.length == 0){
+    buttonElement.disabled = false;
+    console.log('winner')
+  }
 }
