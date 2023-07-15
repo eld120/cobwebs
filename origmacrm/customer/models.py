@@ -66,12 +66,12 @@ class Customer(TimeStampModel):
 
 class Address(TimeStampModel):
     uuid = models.UUIDField(default=uuid.uuid4, editable=False)
-    address_1 = models.CharField(max_length=100)
-    address_2 = models.CharField(max_length=100, blank=True, null=True)
-    city = models.CharField(max_length=50)
-    state = models.CharField(max_length=50)
-    zip_code = models.CharField(max_length=50)
-    phone = models.CharField(max_length=50)
+    address_1 = models.CharField(max_length=70)
+    address_2 = models.CharField(max_length=70, blank=True, null=True)
+    city = models.CharField(max_length=30)
+    state = models.CharField(max_length=20)
+    zip_code = models.CharField(max_length=20)
+    phone = models.CharField(max_length=20)
     email = models.CharField(max_length=50)
 
     def __str__(self) -> str:
