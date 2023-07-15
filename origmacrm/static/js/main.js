@@ -1,4 +1,4 @@
-import { getAddressURL, getCookie, submitAddressData } from "./utils.js";
+import { getAddressURL, submitAddressData, validateFormButton } from "./utils.js";
 
 // Customer id/uuid DOM element and Create/Update flag
 const customerUUID = document.querySelector("#customerUUID");
@@ -39,3 +39,10 @@ addressButton.addEventListener('click', ()=>{
   addressForm.reset()
 
 })
+
+// event to validate whether all input fields contain values
+addressModal.addEventListener('focus', () =>{
+  validateFormButton(addressForm, addressButton)
+
+}
+)
