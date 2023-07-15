@@ -41,7 +41,7 @@ addressButton.addEventListener('click', ()=>{
 })
 
 // event to validate whether all input fields contain values
-addressModal.addEventListener('focus', () =>{
+addressModal.addEventListener('input', () =>{
   validateFormButton(addressForm, addressButton)
 
 }
