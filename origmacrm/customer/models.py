@@ -72,7 +72,7 @@ class Address(TimeStampModel):
     state = models.CharField(max_length=20)
     zip_code = models.CharField(max_length=20)
     phone = models.CharField(max_length=20)
-    email = models.CharField(max_length=50)
+    email = models.EmailField(max_length=50)
 
     def __str__(self) -> str:
         return f"{self.address_1} {self.city} {self.state} {self.zip_code}"
