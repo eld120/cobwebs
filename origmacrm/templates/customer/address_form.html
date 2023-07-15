@@ -37,7 +37,7 @@
               maxlength="70"
               required>
 
-            <label for="addressOneInput">Address Line 1</label>
+            <label for="addressOneInput">Address Line 1*</label>
           </div>
           <div class="mb-3 form-floating" >
             <input type="text" class="form-control" id="addressTwoInput" x-data
@@ -52,7 +52,7 @@
               :value="$store.addressData?.addressCity"
               maxlength="30"
               required>
-            <label for="cityInput">City</label>
+            <label for="cityInput">City*</label>
           </div>
           <div class="mb-3 form-floating">
             <input type="text" class="form-control" id="stateInput"
@@ -60,7 +60,7 @@
               x-data :value="$store.addressData?.addressState"
               maxlength="20"
               required>
-            <label for="stateInput">State</label>
+            <label for="stateInput">State*</label>
           </div>
           <div class="mb-3 form-floating">
             <input type="text" class="form-control" id="zipCodeInput"  x-data
@@ -68,7 +68,7 @@
               :value="$store.addressData?.addressZipCode"
               maxlength="20"
               required>
-            <label for="zipCodeInput">Zip Code</label>
+            <label for="zipCodeInput">Zip Code*</label>
           </div>
           <div class="mb-3 form-floating">
             <input type="text" class="form-control" id="phoneNumberInput" x-data
@@ -76,7 +76,7 @@
               :value="$store.addressData?.addressPhone"
               maxlength="20"
               required>
-            <label for="phoneNumberInput">Phone Number</label>
+            <label for="phoneNumberInput">Phone Number*</label>
           </div>
           <div class="mb-3 form-floating">
             <input type="email" class="form-control" id="emailInput" x-data
@@ -85,7 +85,7 @@
               minlength="5"
               maxlength="50"
               required>
-            <label for="emailInput">Email</label>
+            <label for="emailInput">Email*</label>
           </div>
           <button id="addressFormSubmit" class="btn btn-primary" disabled>Submit</button>
         </form>
