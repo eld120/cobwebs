@@ -22,6 +22,7 @@ const addressModal = document.querySelector('#createAddressModal')
 const addressForm = document.querySelector("#addressForm");
 const addressButton = document.querySelector('#addressFormSubmit');
 
+if (addressModal) {
 // event resetting address model on close
 addressModal.addEventListener('hidden.bs.modal', ()=>{
     addressForm.reset()
@@ -41,8 +42,17 @@ addressButton.addEventListener('click', ()=>{
 })
 
 // event to validate whether all input fields contain values
-addressModal.addEventListener('input', () =>{
-  validateFormButton(addressForm, addressButton)
 
+
+// addressModal.querySelectorAll('input').forEach((element)=>{
+//   element.addEventListener('input', (event)=>{
+//     validateFormButton(addressForm, addressButton)
+//     })
+// })
+
+
+
+  addressModal.addEventListener('input', (event) =>{
+    validateFormButton(addressForm, addressButton)
+    })
 }
-)

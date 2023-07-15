@@ -83,9 +83,8 @@ function getCookie(name) {
 function validateFormButton(formElement, buttonElement){
   let requiredInputs = formElement.querySelectorAll("[required]");
   let emptyInputs = [...requiredInputs].filter(ele => ele.value.trim() == "");
-  if (emptyInputs.length == 0){
+  buttonElement.disabled = true
+  if (emptyInputs.length == 0 && formElement.checkValidity()){
     buttonElement.disabled = false;
-  }else{
-    buttonElement.disabled = true;
   }
 }
