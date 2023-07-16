@@ -24,22 +24,22 @@ class CustomerListView(LoginRequiredMixin, ListView):
 
 class CustomerDetailView(LoginRequiredMixin, CustomerSingleObjectMixin, DetailView):
     model = Customer
-    template_name = "customer_detail.html"
+    template_name = "customer/customer_detail.html"
 
 
 class CustomerCreateView(LoginRequiredMixin, CustomerSingleObjectMixin, CreateView):
     form_class = CustomerForm
-    template_name = "customer_test_form.html"
+    template_name = "customer/customer_test_form.html"
 
 
 class CustomerUpdateView(LoginRequiredMixin, CustomerSingleObjectMixin, UpdateView):
     form_class = CustomerForm
-    template_name = "customer_test_form.html"
+    template_name = "customer/customer_test_form.html"
 
 
 class AddressCreateView(LoginRequiredMixin, CreateView):
     model = Address
-    template_name = "address_form.html"
+    template_name = "customer/address_form.html"
     fields = (
         "address_1",
         "address_2",
@@ -53,7 +53,7 @@ class AddressCreateView(LoginRequiredMixin, CreateView):
 
 class AddressUpdateView(LoginRequiredMixin, CustomerSingleObjectMixin, UpdateView):
     model = Address
-    template_name = "address_form.html"
+    template_name = "customer/address_form.html"
     fields = (
         "address_1",
         "address_2",
