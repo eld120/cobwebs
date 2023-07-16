@@ -1,26 +1,24 @@
-import { getAddressURL, submitAddressData, validateFormButton } from "./utils.js";
+import { getAddressURL, submitAddressData, validateFormButton, createOrUpdate } from "./utils.js";
 
 // Customer id/uuid DOM element and Create/Update flag
 const customerUUID = document.querySelector("#customerUUID");
 const updateFlag = document.querySelector("#updateFlag")
+const billingButton = document.querySelector("#billingAddressButton")
+const shippingButton = document.querySelector("#shippingAddressButton")
 
 // event listeners on the DOM
 if (customerUUID != null && updateFlag != null) {
   let custUUID = customerUUID.value;
 
-  document
-    .querySelector("#billingAddressButton")
-    .addEventListener("click", () => getAddressURL(custUUID, "billing"));
-
-  document
-    .querySelector("#shippingAddressButton")
-    .addEventListener("click", () => getAddressURL(custUUID, "shipping"));
+  billingButton.addEventListener("click", () => getAddressURL(custUUID, "billing"));
+  shippingButton.addEventListener("click", () => getAddressURL(custUUID, "shipping"));
 }
 
 // address Modal and form DOM elements
 const addressModal = document.querySelector('#createAddressModal')
 const addressForm = document.querySelector("#addressForm");
 const addressButton = document.querySelector('#addressFormSubmit');
+
 
 if (addressModal) {
 // event resetting address model on close
@@ -56,3 +54,14 @@ addressButton.addEventListener('click', ()=>{
     validateFormButton(addressForm, addressButton)
     })
 }
+
+const updateArray = [billingButton, shippingButton];
+const createArray = document.querySelectorAll('.add-btn');
+updateArray.forEach((element)=>{
+  element.addEventListener('click', ()=>
+  createOrUpdate(element))
+})
+createArray.forEach((element)=>{
+  element.addEventListener('click', ()=>
+  createOrUpdate(element))
+})

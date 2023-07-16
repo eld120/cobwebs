@@ -6,13 +6,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-
-        <!-- {% if is_update_view %}
-
-            <h4 class="modal-title fs-5">Update Address</h4>
-        {% else %}
-            <h4 class="modal-title fs-5">Create Address</h4>
-        {% endif %} -->
+        <h4 class="modal-title fs-5" x-text="$store.createOrUpdate.title" ></h4>
 
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
