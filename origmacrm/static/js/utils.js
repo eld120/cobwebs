@@ -1,4 +1,4 @@
-export { getAddressURL, getAddressData, submitAddressData, validateFormButton };
+export { getAddressURL, getAddressData, submitAddressData, validateFormButton, createOrUpdate };
 
 async function getAddressURL(url, type) {
   let customerURL = await axios
@@ -15,16 +15,16 @@ async function getAddressURL(url, type) {
 }
 
 async function getAddressData(url) {
-  let addressURL = await axios.get(url).catch((err) => console.log(err));
+  let addressData = await axios.get(url).catch((err) => console.log(err));
 
   return Alpine.store("addressData", {
-    addressOne: addressURL.data.address_1,
-    addressTwo: addressURL.data.address_2,
-    addressCity: addressURL.data.city,
-    addressState: addressURL.data.state,
-    addressZipCode: addressURL.data.zip_code,
-    addressPhone: addressURL.data.phone,
-    addressEmail: addressURL.data.email,
+    addressOne: addressData.data.address_1,
+    addressTwo: addressData.data.address_2,
+    addressCity: addressData.data.city,
+    addressState: addressData.data.state,
+    addressZipCode: addressData.data.zip_code,
+    addressPhone: addressData.data.phone,
+    addressEmail: addressData.data.email,
   });
 }
 
@@ -81,11 +81,23 @@ function getCookie(name) {
 }
 
 function validateFormButton(formElement, buttonElement){
-  console.log('inside the function')
   let requiredInputs = formElement.querySelectorAll("[required]");
   let emptyInputs = [...requiredInputs].filter(ele => ele.value.trim() == "");
-  if (emptyInputs.length == 0){
+  buttonElement.disabled = true
+  if (emptyInputs.length == 0 && formElement.checkValidity()){
     buttonElement.disabled = false;
-    console.log('winner')
   }
 }
+
+
+function createOrUpdate(button){
+
+  if (button.id == ''){
+    Alpine.store('createOrUpdate',{
+      title: 'Create Address'
+    })
+  }else{
+    Alpine.store('createOrUpdate',{
+      title: 'Update Address'
+  })
+}}
