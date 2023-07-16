@@ -6,13 +6,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-
-        {% if is_update_view %}
-
-            <h4 class="modal-title fs-5">Update Address</h4>
-        {% else %}
-            <h4 class="modal-title fs-5">Create Address</h4>
-        {% endif %}
+        <h4 class="modal-title fs-5" x-text="$store.createOrUpdate.title" ></h4>
 
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
@@ -34,51 +28,58 @@
             <input type="text" class="form-control" id="addressOneInput" x-data
               x-model="$store.addressData.addressOne"
               :value="$store.addressData?.addressOne"
+              maxlength="70"
               required>
 
-            <label for="addressOneInput">Address Line 1</label>
+            <label for="addressOneInput">Address Line 1*</label>
           </div>
           <div class="mb-3 form-floating" >
             <input type="text" class="form-control" id="addressTwoInput" x-data
               x-model="$store.addressData.addressTwo"
               :value="$store.addressData?.addressTwo"
-              required>
+              maxlength="70">
             <label for="addressTwoInput">Address Line 2</label>
           </div>
           <div class="mb-3 form-floating">
             <input type="text" class="form-control" id="cityInput" x-data
               x-model="$store.addressData.addressCity"
               :value="$store.addressData?.addressCity"
+              maxlength="30"
               required>
-            <label for="cityInput">City</label>
+            <label for="cityInput">City*</label>
           </div>
           <div class="mb-3 form-floating">
             <input type="text" class="form-control" id="stateInput"
               x-model="$store.addressData.addressState"
               x-data :value="$store.addressData?.addressState"
+              maxlength="20"
               required>
-            <label for="stateInput">State</label>
+            <label for="stateInput">State*</label>
           </div>
           <div class="mb-3 form-floating">
             <input type="text" class="form-control" id="zipCodeInput"  x-data
               x-model="$store.addressData.addressZipCode"
               :value="$store.addressData?.addressZipCode"
+              maxlength="20"
               required>
-            <label for="zipCodeInput">Zip Code</label>
+            <label for="zipCodeInput">Zip Code*</label>
           </div>
           <div class="mb-3 form-floating">
             <input type="text" class="form-control" id="phoneNumberInput" x-data
               x-model="$store.addressData.addressPhone"
               :value="$store.addressData?.addressPhone"
+              maxlength="20"
               required>
-            <label for="phoneNumberInput">Phone Number</label>
+            <label for="phoneNumberInput">Phone Number*</label>
           </div>
           <div class="mb-3 form-floating">
-            <input type="text" class="form-control" id="emailInput" x-data
+            <input type="email" class="form-control" id="emailInput" x-data
               x-model="$store.addressData.addressEmail"
               :value="$store.addressData?.addressEmail"
+              minlength="5"
+              maxlength="50"
               required>
-            <label for="emailInput">Email</label>
+            <label for="emailInput">Email*</label>
           </div>
           <button id="addressFormSubmit" class="btn btn-primary" disabled>Submit</button>
         </form>
