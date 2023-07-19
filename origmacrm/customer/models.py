@@ -1,5 +1,4 @@
 import uuid
-from typing import Iterable, Optional
 
 from django.conf import settings
 from django.db import models
@@ -24,6 +23,11 @@ class TimeStampModel(models.Model):
 
 
 class Customer(TimeStampModel):
+    """
+    A class used to capture a business entity/billing account which may exist in
+    one or more locations/addresses
+    """
+
     INDUSTRY_OPTIONS = (
         ("agriculture", "Agriculture"),
         ("arts entertainment", "Arts & Entertainment"),
