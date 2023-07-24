@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.detail import SingleObjectMixin
 
 from .models import ACTIVE_OPTIONS, Address, Customer
@@ -24,6 +25,10 @@ class CustomerSingleObjectMixin(SingleObjectMixin):
     def form_valid(self, form):
         form.instance.created_by = self.request.user
         return super().form_valid(form)
+
+
+class CustomerLoginRequiredMixin(LoginRequiredMixin):
+    login_url = "user:login"
 
 
 # class CustomerFormDataMixin:
