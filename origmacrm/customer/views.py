@@ -16,7 +16,7 @@ class HomePage(TemplateView):
     template_name = "index.html"
 
 
-class CustomerListView(LoginRequiredMixin, SingleObjectMixin, ListView):
+class CustomerListView(LoginRequiredMixin, ListView):
     model = Customer
     template_name = "dashboard.html"
     # paginate_by = 10
