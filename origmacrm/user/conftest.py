@@ -5,9 +5,9 @@ from .factories import UserFactory
 
 @pytest.fixture
 def rando_user():
-    return UserFactory()
+    return UserFactory(password="sUpErSecrEtwOrdS")
 
 
 @pytest.fixture
 def user_one():
-    return UserFactory(name="Willy Wonka")
+    return UserFactory(password="lolz_password123")
