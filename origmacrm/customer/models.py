@@ -53,6 +53,7 @@ class Customer(TimeStampModel):
     billing_address = models.ForeignKey(
         "Address", related_name="%(class)s_billing_address", on_delete=models.DO_NOTHING
     )
+    # shipping address should be a Many to Many relationship
     shipping_address = models.ForeignKey(
         "Address",
         related_name="%(class)s_shipping_address",

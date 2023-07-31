@@ -13,10 +13,14 @@ from .models import Address, Customer
 
 # Create your views here.
 class HomePage(TemplateView):
+    """Homepage for all users"""
+
     template_name = "index.html"
 
 
 class CustomerListView(LoginRequiredMixin, ListView):
+    """Homepage for authenticated users"""
+
     model = Customer
     template_name = "dashboard.html"
     # paginate_by = 10
@@ -38,6 +42,8 @@ class CustomerUpdateView(LoginRequiredMixin, SingleObjectMixin, UpdateView):
 
 
 class AddressCreateView(LoginRequiredMixin, CreateView):
+    """Unused view currently - Addresses are created via an API for end users"""
+
     model = Address
     template_name = "customer/address_form.html"
     fields = (
@@ -52,6 +58,8 @@ class AddressCreateView(LoginRequiredMixin, CreateView):
 
 
 class AddressUpdateView(LoginRequiredMixin, SingleObjectMixin, UpdateView):
+    """Unused view currently - Addresses are updated via an API for end users"""
+
     model = Address
     template_name = "customer/address_form.html"
     fields = (

@@ -79,6 +79,8 @@ class CustomerForm(forms.ModelForm):
 
 
 class AddressForm(forms.ModelForm):
+    """Currently not used - all Addresses are updated via a serializer/viewset for end users"""
+
     class Meta:
         model = Address
         fields = (

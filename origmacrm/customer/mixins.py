@@ -5,6 +5,8 @@ from .models import ACTIVE_OPTIONS, Address, Customer
 
 
 class CustomerSingleObjectMixin(SingleObjectMixin):
+    """Enables Django to retrieve Addresses/Customers via their UUID rather than pk"""
+
     def get_object(self):
         uuid = self.kwargs["uuid"]
         if "address" in self.request.path:
@@ -28,6 +30,8 @@ class CustomerSingleObjectMixin(SingleObjectMixin):
 
 
 class CustomerLoginRequiredMixin(LoginRequiredMixin):
+    """redirects users to the correct login page"""
+
     login_url = "user:login"
 
 
