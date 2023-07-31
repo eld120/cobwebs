@@ -1,5 +1,7 @@
-export { getAddressFromCustomer, submitAddressData, validateFormButton, createOrUpdate };
+export { getAddressFromCustomer, submitAddressData, enableFormButton, createOrUpdate };
 
+
+// the address data retrieval could/should be moved into Django
 async function getAddressFromCustomer(uuid, type) {
   // returns a given customer's address data object
   const customerURL = await axios
@@ -7,15 +9,15 @@ async function getAddressFromCustomer(uuid, type) {
     .catch((error) => console.log(error));
 
   if (type == "billing") {
-    return addressDataHelper(customerURL.data.billing_address);
+    return getAddressData(customerURL.data.billing_address);
   } else if (type == "shipping") {
-    return addressDataHelper(customerURL.data.shipping_address);
+    return getAddressData(customerURL.data.shipping_address);
   } else {
     throw new Error("500 Error or missing address type");
   }
 }
 
-async function addressDataHelper(url) {
+async function getAddressData(url) {
   const addressData = await axios.get(url).catch((err) => console.log(err));
 
   return Alpine.store("addressData", {
@@ -81,7 +83,8 @@ function getCookie(name) {
   return cookieValue;
 }
 
-function validateFormButton(formElement, buttonElement){
+function enableFormButton(formElement, buttonElement){
+  // enables/disables address submit button
   let requiredInputs = formElement.querySelectorAll("[required]");
   let emptyInputs = [...requiredInputs].filter(ele => ele.value.trim() == "");
   buttonElement.disabled = true
@@ -92,7 +95,6 @@ function validateFormButton(formElement, buttonElement){
 
 
 function createOrUpdate(button){
-
   if (button.id == ''){
     // a button without an id is equal to an empty string
     Alpine.store('createOrUpdate',{

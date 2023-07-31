@@ -1,4 +1,4 @@
-import { getAddressFromCustomer, submitAddressData, validateFormButton, createOrUpdate } from "./utils.js";
+import { getAddressFromCustomer, submitAddressData, enableFormButton, createOrUpdate } from "./utils.js";
 
 // Customer id/uuid DOM element and Create/Update flag
 const customerUUID = document.querySelector("#customerUUID");
@@ -34,7 +34,7 @@ if (addressModal) {
     })
   // event to validate whether all input fields contain values
   addressModal.addEventListener('input', () =>{
-    validateFormButton(addressForm, addressButton)
+    enableFormButton(addressForm, addressButton)
     })
 }
 // sets Address Modal title to Create or Update
