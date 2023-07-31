@@ -13,7 +13,7 @@
 
         <form method="POST" class="modal-body" id="addressForm"
 
-          @submit.prevent=""
+          @submit.prevent="formSubmit"
           x-init="Alpine.store('addressData', {
             addressOne: '',
             addressTwo: '',
@@ -22,66 +22,82 @@
             addressZipCode: '',
             addressPhone: '',
             addressEmail: '',
-            })">
+            })"
+            x-data="{ status: 'normal', errors: {} }">
           {% csrf_token %}
-          <div class="mb-3 form-floating">
-            <input type="text" class="form-control" id="addressOneInput" x-data
-              x-model="$store.addressData.addressOne"
-              :value="$store.addressData?.addressOne"
-              maxlength="70"
-              required>
+          <div x-show="status === 'normal'">
+            <div class="mb-3 form-floating">
+              <input type="text" class="form-control" id="addressOneInput" x-data
+                x-model="$store.addressData.addressOne"
+                :value="$store.addressData?.addressOne"
+                maxlength="70"
+                required>
+              <label for="addressOneInput">Address Line 1*</label>
+            </div>
+            <div class="mb-3 form-floating" >
+              <input type="text" class="form-control" id="addressTwoInput" x-data
+                x-model="$store.addressData.addressTwo"
+                :value="$store.addressData?.addressTwo"
+                maxlength="70">
+              <label for="addressTwoInput">Address Line 2</label>
+            </div>
+            <div class="mb-3 form-floating">
+              <input type="text" class="form-control" id="cityInput" x-data
+                x-model="$store.addressData.addressCity"
+                :value="$store.addressData?.addressCity"
+                maxlength="30"
+                required>
+              <label for="cityInput">City*</label>
+            </div>
+            <div class="mb-3 form-floating">
+              <input type="text" class="form-control" id="stateInput"
+                x-model="$store.addressData.addressState"
+                x-data :value="$store.addressData?.addressState"
+                maxlength="20"
+                required>
+              <label for="stateInput">State*</label>
+            </div>
+            <div class="mb-3 form-floating">
+              <input type="text" class="form-control" id="zipCodeInput"  x-data
+                x-model="$store.addressData.addressZipCode"
+                :value="$store.addressData?.addressZipCode"
+                maxlength="20"
+                required>
+              <label for="zipCodeInput">Zip Code*</label>
+            </div>
+            <div class="mb-3 form-floating">
+              <input type="text" class="form-control" id="phoneNumberInput" x-data
+                x-model="$store.addressData.addressPhone"
+                :value="$store.addressData?.addressPhone"
+                maxlength="20"
+                required>
+              <label for="phoneNumberInput">Phone Number*</label>
+            </div>
+            <div class="mb-3 form-floating">
+              <input type="email" class="form-control" id="emailInput" x-data
+                x-model="$store.addressData.addressEmail"
+                :value="$store.addressData?.addressEmail"
+                minlength="5"
+                maxlength="50"
+                required>
+              <label for="emailInput">Email*</label>
+            </div>
+            <button id="addressFormSubmit" class="btn btn-primary" disabled>Submit</button>
+            {% comment %} <template >
+              <button id="addressFormSubmit" class="btn btn-primary" disabled>Submit</button>
+            </template> {% endcomment %}
+          </div>
+          <div x-show="status === 'success'">
+            <p >
+             Successfully submitted form ✅
+            </p>
+           </div>
 
-            <label for="addressOneInput">Address Line 1*</label>
-          </div>
-          <div class="mb-3 form-floating" >
-            <input type="text" class="form-control" id="addressTwoInput" x-data
-              x-model="$store.addressData.addressTwo"
-              :value="$store.addressData?.addressTwo"
-              maxlength="70">
-            <label for="addressTwoInput">Address Line 2</label>
-          </div>
-          <div class="mb-3 form-floating">
-            <input type="text" class="form-control" id="cityInput" x-data
-              x-model="$store.addressData.addressCity"
-              :value="$store.addressData?.addressCity"
-              maxlength="30"
-              required>
-            <label for="cityInput">City*</label>
-          </div>
-          <div class="mb-3 form-floating">
-            <input type="text" class="form-control" id="stateInput"
-              x-model="$store.addressData.addressState"
-              x-data :value="$store.addressData?.addressState"
-              maxlength="20"
-              required>
-            <label for="stateInput">State*</label>
-          </div>
-          <div class="mb-3 form-floating">
-            <input type="text" class="form-control" id="zipCodeInput"  x-data
-              x-model="$store.addressData.addressZipCode"
-              :value="$store.addressData?.addressZipCode"
-              maxlength="20"
-              required>
-            <label for="zipCodeInput">Zip Code*</label>
-          </div>
-          <div class="mb-3 form-floating">
-            <input type="text" class="form-control" id="phoneNumberInput" x-data
-              x-model="$store.addressData.addressPhone"
-              :value="$store.addressData?.addressPhone"
-              maxlength="20"
-              required>
-            <label for="phoneNumberInput">Phone Number*</label>
-          </div>
-          <div class="mb-3 form-floating">
-            <input type="email" class="form-control" id="emailInput" x-data
-              x-model="$store.addressData.addressEmail"
-              :value="$store.addressData?.addressEmail"
-              minlength="5"
-              maxlength="50"
-              required>
-            <label for="emailInput">Email*</label>
-          </div>
-          <button id="addressFormSubmit" class="btn btn-primary" disabled>Submit</button>
+           <div x-show="status === 'error'">
+            <p>
+             Error submitting your form ❌
+            </p>
+           </div>
         </form>
 
       </div>
