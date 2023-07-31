@@ -42,7 +42,7 @@ class CustomerFactory(factory.django.DjangoModelFactory):
     dba = factory.Faker("text", max_nb_chars=20)
     name = factory.Faker("text", max_nb_chars=20)
     billing_address = factory.SubFactory(AddressFactory)
-    shipping_address = factory.SubFactory(AddressFactory)
+    shipping_addresses = factory.SubFactory(AddressFactory)
     # active = factory.Faker(
     #     "random_element", element=[choice[1] for choice in ACTIVE_OPTIONS]
     # )

@@ -20,7 +20,7 @@ def customer_two():
     return CustomerFactory(
         created_by=user_one,
         billing_address=AddressFactory(address_1="123 Fake St", created_by=user_one),
-        shipping_address=AddressFactory(
+        shipping_addresses=AddressFactory(
             address_1="456 Flaming Lava Cir", created_by=user_one
         ),
     )

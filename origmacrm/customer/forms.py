@@ -66,7 +66,7 @@ class CustomerForm(forms.ModelForm):
             "dba",
             "name",
             "billing_address",
-            "shipping_address",
+            "shipping_addresses",
             "start_date",
             "end_date",
             "active",
