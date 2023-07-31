@@ -10,7 +10,7 @@ class CustomerSerializer(serializers.HyperlinkedModelSerializer):
         many=False,
         queryset=Customer.objects.all(),
     )
-    shipping_address = serializers.HyperlinkedRelatedField(
+    shipping_addresses = serializers.HyperlinkedRelatedField(
         view_name="api:address-detail",
         lookup_field="uuid",
         many=False,
@@ -24,7 +24,7 @@ class CustomerSerializer(serializers.HyperlinkedModelSerializer):
             "dba",
             "name",
             "billing_address",
-            "shipping_address",
+            "shipping_addresses",
             "start_date",
             "end_date",
             "active",
