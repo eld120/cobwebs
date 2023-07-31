@@ -1,21 +1,22 @@
-export { getAddressURL, getAddressData, submitAddressData, validateFormButton, createOrUpdate };
+export { getAddressFromCustomer, submitAddressData, validateFormButton, createOrUpdate };
 
-async function getAddressURL(url, type) {
-  let customerURL = await axios
-    .get("/api1/customers/" + url)
+async function getAddressFromCustomer(uuid, type) {
+  // returns a given customer's address data object
+  const customerURL = await axios
+    .get("/api1/customers/" + uuid)
     .catch((error) => console.log(error));
 
   if (type == "billing") {
-    return getAddressData(customerURL.data.billing_address);
+    return addressDataHelper(customerURL.data.billing_address);
   } else if (type == "shipping") {
-    return getAddressData(customerURL.data.shipping_address);
+    return addressDataHelper(customerURL.data.shipping_address);
   } else {
     throw new Error("500 Error or missing address type");
   }
 }
 
-async function getAddressData(url) {
-  let addressData = await axios.get(url).catch((err) => console.log(err));
+async function addressDataHelper(url) {
+  const addressData = await axios.get(url).catch((err) => console.log(err));
 
   return Alpine.store("addressData", {
     addressOne: addressData.data.address_1,
@@ -93,11 +94,25 @@ function validateFormButton(formElement, buttonElement){
 function createOrUpdate(button){
 
   if (button.id == ''){
+    // a button without an id is equal to an empty string
     Alpine.store('createOrUpdate',{
       title: 'Create Address'
     })
   }else{
+    // update buttons have a specific element ID
     Alpine.store('createOrUpdate',{
       title: 'Update Address'
   })
 }}
+
+
+// handles POST/PUT on the client based on create/update
+function postOrPut(button){
+  if (button.id == ''){
+
+  }
+  else{
+
+  }
+
+}
