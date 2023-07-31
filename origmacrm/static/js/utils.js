@@ -12,13 +12,14 @@ async function getAddressFromCustomer(uuid, type) {
   if (type == "billing") {
     return getAddressData(customerURL.data.billing_address);
   } else if (type == "shipping") {
-    return getAddressData(customerURL.data.shipping_address);
+    return getAddressData(customerURL.data.shipping_addresses);
   } else {
     throw new Error("500 Error or missing address type");
   }
 }
 
 async function getAddressData(url) {
+  // Going to need to handle a single address being returned as well as an array of addresses
   const addressData = await axios.get(url).catch((err) => console.log(err));
 
   return Alpine.store("addressData", {
