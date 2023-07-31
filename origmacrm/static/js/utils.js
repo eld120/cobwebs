@@ -2,6 +2,7 @@ export { getAddressFromCustomer, submitAddressData, enableFormButton, createOrUp
 
 
 // the address data retrieval could/should be moved into Django
+// minimally a single api call could/should solve this
 async function getAddressFromCustomer(uuid, type) {
   // returns a given customer's address data object
   const customerURL = await axios
