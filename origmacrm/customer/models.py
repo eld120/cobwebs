@@ -70,7 +70,12 @@ class Customer(TimeStampModel):
 
 
 class Address(TimeStampModel):
+    PRIMARY_CHOICES = (("y", "Yes"), ("n", "No"))
+
     uuid = models.UUIDField(default=uuid.uuid4, editable=False)
+    primary = models.CharField(
+        default="n", choices=PRIMARY_CHOICES, blank=True, max_length=3
+    )
     name = models.CharField(max_length=70)
     address_1 = models.CharField(max_length=70)
     address_2 = models.CharField(max_length=70, blank=True, null=True)
@@ -79,7 +84,6 @@ class Address(TimeStampModel):
     zip_code = models.CharField(max_length=20)
     phone = models.CharField(max_length=20)
     email = models.EmailField(max_length=50)
-    primary = models.BooleanField(default=False)
 
     def __str__(self) -> str:
         return f"{self.name} {self.address_1} {self.city} {self.state} {self.zip_code}"
