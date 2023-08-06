@@ -100,3 +100,6 @@ class Address(TimeStampModel):
 class CustomerShippingRelationship(models.Model):
     customer = models.ForeignKey("Customer", on_delete=models.DO_NOTHING)
     shipping_addresses = models.ForeignKey("Address", on_delete=models.DO_NOTHING)
+
+    def __str__(self) -> str:
+        return f"{self.customer} ---- {self.shipping_addresses}"

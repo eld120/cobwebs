@@ -13,7 +13,7 @@ class CustomerSerializer(serializers.HyperlinkedModelSerializer):
     shipping_addresses = serializers.HyperlinkedRelatedField(
         view_name="api:address-detail",
         lookup_field="uuid",
-        many=False,
+        many=True,
         queryset=Customer.objects.all(),
     )
 
@@ -33,10 +33,14 @@ class CustomerSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class AddressSerializer(serializers.HyperlinkedModelSerializer):
+    primary = serializers.ChoiceField(Address.PRIMARY_CHOICES)
+
     class Meta:
         model = Address
         fields = (
             "uuid",
+            "primary",
+            "name",
             "address_1",
             "address_2",
             "city",

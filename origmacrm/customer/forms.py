@@ -1,5 +1,5 @@
 from crispy_bootstrap5.bootstrap5 import FloatingField
-from crispy_forms.bootstrap import Modal, StrictButton
+from crispy_forms.bootstrap import Field, Modal, StrictButton
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, Layout, Row, Submit
 from django import forms
@@ -36,7 +36,7 @@ class CustomerForm(forms.ModelForm):
             ),
             Row(
                 Div(
-                    FloatingField("shipping_address"),
+                    Field("shipping_addresses", css_class="form-select"),
                     StrictButton(
                         "",
                         css_class="btn-tertiary input-group-text add-btn",
@@ -84,6 +84,8 @@ class AddressForm(forms.ModelForm):
     class Meta:
         model = Address
         fields = (
+            "primary",
+            "name",
             "address_1",
             "address_2",
             "city",
