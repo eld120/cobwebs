@@ -54,10 +54,10 @@ class Customer(TimeStampModel):
         "Address", related_name="%(class)s_billing_address", on_delete=models.DO_NOTHING
     )
     # shipping address should be a Many to Many relationship
-    shipping_address = models.ForeignKey(
+    shipping_addresses = models.ManyToManyField(
         "Address",
+        through="CustomerShippingRelationship",
         related_name="%(class)s_shipping_address",
-        on_delete=models.DO_NOTHING,
     )
     active = models.CharField(choices=ACTIVE_OPTIONS, max_length=50)
     customer_type = models.CharField(choices=INDUSTRY_OPTIONS, max_length=100)
@@ -70,7 +70,13 @@ class Customer(TimeStampModel):
 
 
 class Address(TimeStampModel):
+    PRIMARY_CHOICES = (("y", "Yes"), ("n", "No"))
+
     uuid = models.UUIDField(default=uuid.uuid4, editable=False)
+    primary = models.CharField(
+        default="n", choices=PRIMARY_CHOICES, blank=True, max_length=3
+    )
+    name = models.CharField(max_length=70)
     address_1 = models.CharField(max_length=70)
     address_2 = models.CharField(max_length=70, blank=True, null=True)
     city = models.CharField(max_length=30)
@@ -80,7 +86,7 @@ class Address(TimeStampModel):
     email = models.EmailField(max_length=50)
 
     def __str__(self) -> str:
-        return f"{self.address_1} {self.city} {self.state} {self.zip_code}"
+        return f"{self.name} {self.address_1} {self.city} {self.state} {self.zip_code}"
 
     def get_absolute_url(self):
         return reverse("customer:address_update", kwargs={"uuid": self.uuid})
@@ -89,3 +95,11 @@ class Address(TimeStampModel):
         if request:
             self.created_by = request.user
         super(Address, self).save(*args, **kwargs)
+
+
+class CustomerShippingRelationship(models.Model):
+    customer = models.ForeignKey("Customer", on_delete=models.DO_NOTHING)
+    shipping_addresses = models.ForeignKey("Address", on_delete=models.DO_NOTHING)
+
+    def __str__(self) -> str:
+        return f"{self.customer} ---- {self.shipping_addresses}"
