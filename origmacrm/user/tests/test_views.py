@@ -22,10 +22,6 @@ class UserTestCase(TestCase):
         assert response.template_name[0] == "index.html"
 
     def test_dashboard(self):
-        request = self.rf.get("/dashboard/")
-        response = CustomerListView.as_view()(request)
-        assert response.status_code == 302
-
         unauthorized_response = self.client.get("/dashboard/")
         assert unauthorized_response.status_code == 302
         login = self.client.login(username=self.user.username, password="testpassword")
