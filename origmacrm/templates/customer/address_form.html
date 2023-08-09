@@ -24,14 +24,14 @@
             addressZipCode: '',
             addressPhone: '',
             addressEmail: '',
-            httpMethod:'',
-
             })"
             x-data="{ status: 'normal', errors: {} }">
           {% csrf_token %}
           <div x-show="status === 'normal'">
 
-            <input type="hidden" x-data x-model="$store.addressData.httpMethod" :value="$store.createOrUpdate.method">
+            <input type="hidden" x-data x-model="$store.createOrUpdate.method"
+            x-init="$watch('$store.createOrUpdate.method', ()=> console.log($store.createOrUpdate.method))"
+             :value="$store.createOrUpdate.method">
             <div class="form-check form-switch" >
               <input class="form-check-input" type="checkbox" role="switch" id="addressPrimarySwitch"
               x-data x-model="$store.addressData.addressPrimary" :value="$store.addressData.addressPrimary === 'y'">

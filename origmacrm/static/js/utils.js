@@ -9,9 +9,9 @@ async function getAddressFromCustomer(uuid, type) {
     .get("/api1/customers/" + uuid)
     .catch((error) => console.log(error));
 
-  if (type == "billing") {
+  if (type === "billing") {
     return getAddressData(customerURL.data.billing_address);
-  } else if (type == "shipping") {
+  } else if (type === "shipping") {
     return getAddressData(customerURL.data.shipping_addresses);
   } else {
     throw new Error("500 Error or missing address type");
@@ -19,9 +19,9 @@ async function getAddressFromCustomer(uuid, type) {
 }
 
 async function getAddressData(url) {
-  // Going to need to handle a single address being returned as well as an array of addresses
+  // Going to need to handle a single address being returned as well as an array of addresses <- idk if this is true anymore
   const addressData = await axios.get(url).catch((err) => console.log(err));
-  console.log(addressData)
+
   return Alpine.store("addressData", {
     addressPrimary: addressData.data.primary,
     addressName: addressData.data.name,
@@ -38,11 +38,9 @@ async function getAddressData(url) {
 
 async function submitAddressData(url) {
   const dataObject = Alpine.store("addressData")
-  const httpVerb = dataObject.httpMethod
+  const httpVerb = Alpine.store('createOrUpdate')
 
-
-
-  if (httpVerb == "POST") {
+if (httpVerb.method === "POST") {
     await axios
       .post(url, {
         primary:  dataObject.addressPrimary ? "y" : "n",
@@ -63,6 +61,7 @@ async function submitAddressData(url) {
         // need error handling
       .catch((error) => console.log(error));
   } else {
+    console.log(httpVerb)
     await axios
       .put(url + dataObject.addressUUID+'/', {
         primary: dataObject.addressPrimary ? "y" : "n",
@@ -103,21 +102,23 @@ function enableFormButton(formElement, buttonElement){
   let requiredInputs = formElement.querySelectorAll("[required]");
   let emptyInputs = [...requiredInputs].filter(ele => ele.value.trim() == "");
   buttonElement.disabled = true
-  if (emptyInputs.length == 0 && formElement.checkValidity()){
+  if (emptyInputs.length === 0 && formElement.checkValidity()){
     buttonElement.disabled = false;
   }
 }
 
 
 function createOrUpdate(button){
-  if (button.id == ''){
+  if (button.id === ''){
     // a button without an id is equal to an empty string
     Alpine.store('createOrUpdate',{
-      title: "Create Address"
+      title: "Create Address",
+      method: 'POST'
     })
   }else{
     // update buttons have a specific element ID
     Alpine.store('createOrUpdate',{
-      title: "Update Address"
+      title: "Update Address",
+      method: 'PUT'
   })
 }}
