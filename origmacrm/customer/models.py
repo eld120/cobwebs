@@ -19,7 +19,8 @@ class TimeStampModel(models.Model):
         auto_now=False, auto_now_add=False, blank=True, null=True
     )
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    # active = models.CharField(choices=ACTIVE_OPTIONS, max_length=50)
+    active = models.CharField(choices=ACTIVE_OPTIONS, max_length=50)
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False)
 
 
 class Customer(TimeStampModel):
@@ -47,19 +48,16 @@ class Customer(TimeStampModel):
         ("utilities", "Utilities"),
         ("wholesale", "Wholesale"),
     )
-    uuid = models.UUIDField(default=uuid.uuid4, editable=False)
     dba = models.CharField(max_length=50)
     name = models.CharField(max_length=50)
     billing_address = models.ForeignKey(
         "Address", related_name="%(class)s_billing_address", on_delete=models.DO_NOTHING
     )
-    # shipping address should be a Many to Many relationship
     shipping_addresses = models.ManyToManyField(
         "Address",
         through="CustomerShippingRelationship",
-        related_name="%(class)s_shipping_address",
+        related_name="%(class)s_shipping_addresses",
     )
-    active = models.CharField(choices=ACTIVE_OPTIONS, max_length=50)
     customer_type = models.CharField(choices=INDUSTRY_OPTIONS, max_length=100)
 
     def __str__(self) -> str:
@@ -72,7 +70,6 @@ class Customer(TimeStampModel):
 class Address(TimeStampModel):
     PRIMARY_CHOICES = (("y", "Yes"), ("n", "No"))
 
-    uuid = models.UUIDField(default=uuid.uuid4, editable=False)
     primary = models.CharField(
         default="n", choices=PRIMARY_CHOICES, blank=True, max_length=3
     )
