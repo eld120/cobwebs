@@ -22,6 +22,9 @@ class TimeStampModel(models.Model):
     active = models.CharField(choices=ACTIVE_OPTIONS, max_length=50)
     uuid = models.UUIDField(default=uuid.uuid4, editable=False)
 
+    class Meta:
+        abstract = True
+
 
 class Customer(TimeStampModel):
     """
@@ -83,7 +86,9 @@ class Address(TimeStampModel):
     email = models.EmailField(max_length=50)
 
     def __str__(self) -> str:
-        return f"{self.name} {self.address_1} {self.city} {self.state} {self.zip_code}"
+        return (
+            f"{self.name} @ {self.address_1} {self.city} {self.state} {self.zip_code}"
+        )
 
     def get_absolute_url(self):
         return reverse("customer:address_update", kwargs={"uuid": self.uuid})
