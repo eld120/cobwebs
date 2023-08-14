@@ -24,7 +24,12 @@
             addressZipCode: '',
             addressPhone: '',
             addressEmail: '',
+            addressActive: '',
+            addressStartDate: '',
+            addressEndDate: '',
             httpMethod:'',
+            addressUUID: '',
+            shippingAddressList: [],
             })"
             x-data="{ status: 'normal', errors: {} }">
           {% csrf_token %}
