@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_list_or_404, get_object_or_404
 from django.views.generic.detail import SingleObjectMixin
 
-from .models import ACTIVE_OPTIONS, Address, Customer
+from .models import ACTIVE_OPTIONS, Address, Customer, CustomerShippingRelationship
 
 
 class CustomerSingleObjectMixin(SingleObjectMixin):
@@ -18,7 +18,9 @@ class CustomerSingleObjectMixin(SingleObjectMixin):
         context = super().get_context_data(**kwargs)
         updates = {
             "is_update_view": "update" in self.request.path,
-            "address_list": get_list_or_404(Address),
+            "address_list": Customer.objects.prefetch_related(
+                "shipping_addresses"
+            ),  # get_list_or_404(Address, ), #Address.objects.all(), # get_list_or_404(Address),
             "customer_types": (type[1] for type in Customer.INDUSTRY_OPTIONS),
             "active_flag": (type[1] for type in ACTIVE_OPTIONS),
         }
@@ -34,6 +36,10 @@ class CustomerLoginRequiredMixin(LoginRequiredMixin):
     """redirects users to the correct login page"""
 
     login_url = "user:login"
+
+
+class CustomerCreateMixin(SingleObjectMixin):
+    pass
 
 
 # class CustomerFormDataMixin:
