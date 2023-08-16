@@ -84,7 +84,7 @@ sphinxcontrib-serializinghtml==1.1.5
 sqlparse==0.4.4
 termcolor==2.3.0
 tomlkit==0.11.8
-tornado==6.3.2
+tornado==6.3.3
 typeguard==3.0.2
 typing_extensions==4.6.3
 tzdata==2023.3
