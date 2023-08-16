@@ -69,6 +69,23 @@ class Customer(TimeStampModel):
     def get_absolute_url(self):
         return reverse("customer:customer_update", kwargs={"uuid": self.uuid})
 
+    def get_shipping_addresses(self):
+        return self.shipping_addresses.values(
+            "start_date",
+            "end_date",
+            "active",
+            "uuid",
+            "primary",
+            "name",
+            "address_1",
+            "address_2",
+            "city",
+            "state",
+            "zip_code",
+            "phone",
+            "email",
+        )
+
 
 class Address(TimeStampModel):
     PRIMARY_CHOICES = (("y", "Yes"), ("n", "No"))

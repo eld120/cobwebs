@@ -16,6 +16,9 @@ class CustomerSerializer(serializers.HyperlinkedModelSerializer):
         many=True,
         queryset=Address.objects.all(),
     )
+    shipping_addresses_list = serializers.SerializerMethodField(
+        method_name="get_shipping_addresses_list"
+    )
     created_by = serializers.HyperlinkedRelatedField(
         view_name="user:user_detail",
         lookup_field="pk",
@@ -31,6 +34,7 @@ class CustomerSerializer(serializers.HyperlinkedModelSerializer):
             "name",
             "billing_address",
             "shipping_addresses",
+            "shipping_addresses_list",
             "start_date",
             "end_date",
             "active",
@@ -46,6 +50,9 @@ class CustomerSerializer(serializers.HyperlinkedModelSerializer):
                 ),
             )
         ]
+
+    def get_shipping_addresses_list(self, obj):
+        return obj.get_shipping_addresses()
 
 
 class AddressSerializer(serializers.HyperlinkedModelSerializer):
