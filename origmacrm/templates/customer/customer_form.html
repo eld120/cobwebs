@@ -1,20 +1,6 @@
 {% extends 'index.html' %} {% load customer_tags %} {% block body %}
 
-<div class="container w-50"
-x-init="Alping.store('customerData',{
-  customerDBA: '',
-  customerName: '',
-  customerUUID: '',
-  customerBillingAddress: '',
-  customerShippingAddress: [],
-  customerActive: '',
-  customerCustomerType: '',
-  customerStartDate: '',
-  customerEndDate: '',
-  customerHTTPMethod: '',
-  customerCreatedBy: '',
-})"
->
+<div class="container w-50">
   {% if is_update_view %}
   <h2 class="mb-3" id="updateFlag">Update Customer</h2>
   {% else %}
@@ -25,205 +11,23 @@ x-init="Alping.store('customerData',{
 
     <form method="post">
       {% csrf_token %}
-      <div id="div_id_dba" class="form-floating mb-3">
-        <input
-          type="text"
-          name="dba"
-          maxlength="50"
-          class="textinput form-control"
-          placeholder="dba"
-          x-data
-          x-model="$store.customerData.customerDBA"
-          :value="$store.customerData?.customerDBA"
-          required
-          id="id_dba"
-        />
-        <label for="id_dba"> Dba<span class="asteriskField">*</span> </label>
-      </div>
-      <div id="div_id_name" class="form-floating mb-3">
-        <input
-          type="text"
-          name="name"
-          maxlength="50"
-          class="textinput form-control"
-          x-data
-          x-model="$store.customerData.customerName"
-          :value="$store.customerData?.customerName"
-          placeholder="name"
-          required
-          id="id_name"
-        />
-        <label for="id_name"> Name<span class="asteriskField">*</span> </label>
-      </div>
 
-      <div class="row">
-        <div class="input-group input-group-sm mb-2">
-          <div id="div_id_billing_address" class="form-floating mb-3">
+      {% include "./partials/_customer_header_form.html" %}
 
-            <select
-              name="billing_address"
-              class="select form-select"
-              placeholder="billing_address"
-              required
-              id="id_billing_address"
-            >
-              <option value="" selected>---------</option>
-              <option value="1">Testing again bc need to see</option>
-              <option value="3">test 123 New Address Somonauk IL 60552</option>
-              <option value="4">
-                TRYING NAME AGAIN 123 New Address Chicago IL 123141253
-              </option>
-              <option value="5">
-                UPDATE NAME 123 New Address Somonauk IL 60552
-              </option>
-              <option value="6">
-                Putting a name in here 123 New Address Somonauk IL 60552
-              </option>
 
-            </select>
-            <label for="id_billing_address">
-              Billing address<span class="asteriskField">*</span>
-            </label>
-          </div>
+     {% include "./partials/_shipping_addresses.html" %}
 
-          <button
-            class="btn btn-tertiary input-group-text add-btn"
-            data-bs-target="#createAddressModal"
-            data-bs-toggle="modal"
-            type="button"
-          ></button>
-          <button
-            class="btn btn-tertiary input-group-text edit-btn"
-            data-bs-target="#createAddressModal"
-            data-bs-toggle="modal"
-            id="billingAddressButton"
-            type="button"
-          ></button>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-group input-group-sm mb-2">
-          <div id="div_id_shipping_addresses" class="mb-3">
-            <label for="id_shipping_addresses" class="form-label requiredField">
-              Shipping addresses<span class="asteriskField">*</span>
-            </label>
-            <select
-              name="shipping_addresses"
-              class="form-select selectmultiple"
-              required
-              id="id_shipping_addresses"
-              multiple
-            >
-              <option value="1">Testing again bc need to see</option>
-              <option value="3">test 123 New Address Somonauk IL 60552</option>
-              <option value="4">
-                TRYING NAME AGAIN 123 New Address Chicago IL 123141253
-              </option>
-              <option value="5">
-                UPDATE NAME 123 New Address Somonauk IL 60552
-              </option>
 
-            </select>
-          </div>
-          <button
-            class="btn btn-tertiary input-group-text add-btn"
-            data-bs-target="#createAddressModal"
-            data-bs-toggle="modal"
-            type="button"
-          ></button>
-          <button
-            class="btn btn-tertiary input-group-text edit-btn"
-            data-bs-target="#createAddressModal"
-            data-bs-toggle="modal"
-            id="shippingAddressButton"
-            type="button"
-          ></button>
-        </div>
-      </div>
-      <div id="div_id_start_date" class="form-floating mb-3">
-        <input
-          type="text"
-          name="start_date"
-          class="dateinput form-control"
-          x-data
-          x-model="$store.customerData.startDate"
-          :value="$store.customerData?.startDate"
-          placeholder="start_date"
-          required
-          id="id_start_date"
-        />
-        <label for="id_start_date">
-          Start date<span class="asteriskField">*</span>
-        </label>
-      </div>
-      <div id="div_id_end_date" class="form-floating mb-3">
-        <input
-          type="text"
-          name="end_date"
-          class="dateinput form-control"
-          x-data
-          x-model="$store.customerData.endDate"
-          :value="$store.customerData?.endDate"
-          placeholder="end_date"
-          id="id_end_date"
-        />
-        <label for="id_end_date"> End date </label>
-      </div>
-      <div id="div_id_active" class="form-floating mb-3">
-        <select
-          name="active"
-          class="select form-select"
-          placeholder="active"
-          required
-          id="id_active"
-        >
-          <option value="" selected>---------</option>
-          <option value="active">Active</option>
-          <option value="inactive">Inactive</option>
-          <option value="archived">Archived</option>
-        </select>
-        <label for="id_active">
-          Active<span class="asteriskField">*</span>
-        </label>
-      </div>
-      <div id="div_id_customer_type" class="form-floating mb-3">
-        <select
-          name="customer_type"
-          class="select form-select"
-          placeholder="customer_type"
-          required
-          id="id_customer_type"
-        >
-          <option value="" selected>---------</option>
-          <option value="agriculture">Agriculture</option>
-          <option value="arts entertainment">Arts &amp; Entertainment</option>
-          <option value="construction">Construction</option>
-          <option value="education">Education</option>
-          <option value="energy">Energy</option>
-          <option value="food">Food &amp; Hospitality</option>
-          <option value="finance">Finance and Insurance</option>
-          <option value="healthcare">Healthcare</option>
-          <option value="manufacturing">Manufacturing</option>
-          <option value="mining">Mining</option>
-          <option value="other">Other Services</option>
-          <option value="services">
-            Professional, Scientific, and Tech Services
-          </option>
-          <option value="real estate">Real Estate</option>
-          <option value="retail">Retail</option>
-          <option value="transportation">Transportation &amp; Logistics</option>
-          <option value="utilities">Utilities</option>
-          <option value="wholesale">Wholesale</option>
-        </select>
-        <label for="id_customer_type">
-          Customer type<span class="asteriskField">*</span>
-        </label>
-      </div>
+
+
+
+
+
 
       <button class="btn btn-primary" type="submit">Submit</button>
     </form>
 
 </div>
-<input type="hidden" name="customerUUID" id="customerUUID" value="" />
 
-{% include "address_form.html" %} {% endblock body %}
+
+{% include "customer/address_form.html" %} {% endblock body %}
