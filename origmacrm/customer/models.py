@@ -86,6 +86,12 @@ class Customer(TimeStampModel):
             "email",
         )
 
+    def get_customer_industry_options(self):
+        return self.INDUSTRY_OPTIONS
+
+    def get_customer_active_options(self):
+        return ACTIVE_OPTIONS
+
 
 class Address(TimeStampModel):
     PRIMARY_CHOICES = (("y", "Yes"), ("n", "No"))
