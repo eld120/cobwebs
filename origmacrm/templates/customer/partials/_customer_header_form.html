@@ -1,12 +1,27 @@
 
 
-    <div class="form-floating mb-3">
-        <input class="form-control" id="customerUUID"
+    <div class="form-floating mb-3" x-init="Alpine.store('customerData',{
+        customerDBA: '',
+        customerName: '',
+        customerUUID: '',
+        customerBillingAddress: '',
+        customerShippingAddresses: [],
+        customerShippingAddressList: [],
+        customerActive: '',
+        customerActiveOptions: [],
+        customerCustomerType: '',
+        customerCustomerTypeOptions: [],
+        customerStartDate: '',
+        customerEndDate: '',
+        customerHTTPMethod: '',
+        customerCreatedBy: '',
+      })">
+        <input class="form-control" id="custUUID"
             name="uuid"
             x-data
             x-model="$store.customerData.customerUUID"
             :value="$store.customerData?.customerUUID" disabled>
-        <label  for="customerUUID">ID</label>
+        <label  for="custUUID">ID</label>
     </div>
 
     <div class="form-floating mb-3">
@@ -30,7 +45,6 @@
     </div>
 
     <div class="form-floating mb-3">
-
         <select
           name="active"
           class="select form-select"
@@ -38,12 +52,11 @@
           required
           x-data
           x-model="$store.customerData.customerActive"
-          id="customerActive"
-
-        >
-        <template x-for="for active in $store.customerData.customerActiveOptions" :key="active[0]">
-            <option :value="active[1]"></option>
+          id="customerActive">
+        <template x-for="active in $store.customerData.customerActiveOptions" :key="active[0]">
+            <option :value="active[0]" x-text="active[1]"></option>
         </template>
+        </select>
         <label for="customerActive">Active Status<span class="asteriskField">*</label>
     </div>
 
@@ -57,7 +70,7 @@
         x-model="$store.customerData.customerCustomerType">
 
 
-        <template x-for="for option in customerCustomerTypeOptions" :key="option[0]">
+        <template x-for="option in $store.customerData?.customerCustomerTypeOptions" :key="option[0]">
             <option :value="$store.customerData?.customerCustomerType" x-text="option[1]"></option>
         </template>
     </select>
@@ -94,7 +107,7 @@
               >
                 <template x-for="option in $store.customerData?.customerShippingAddressList" :key="option.uuid"
                 >
-                    <option x-text="option.name option.address_1 option.city option.state option.zip_code" ></option>
+                    <option x-text="option.name" ></option>
                 </template>
               </select>
               <label for="id_billing_address">

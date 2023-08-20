@@ -1,12 +1,13 @@
-export { getAddressData, getAddressFromCustomer, submitAddressData };
+export { getAddressData, submitAddressData };
 import { getCookie } from "./utils.js";
 
-async function getAddressData(url, type) {
-  // Going to need to handle a single address being returned as well as an array of addresses <- idk if this is true anymore
-  const addressData = await axios.get(`${url}`).catch((err) => console.log(err));
+async function getAddressData(url) {
+  //
+   const request = await fetch(`${url}`).catch((err) => console.log(`-------- getAddressData error -------- ${err}`));
+   const addressData = request.json()
 
-  if (type === 'billing'){
   return Alpine.store("addressData", {
+    addressUUID: addressData.data.uuid,
     addressPrimary: addressData.data.primary,
     addressName: addressData.data.name,
     addressOne: addressData.data.address_1,
@@ -16,34 +17,12 @@ async function getAddressData(url, type) {
     addressZipCode: addressData.data.zip_code,
     addressPhone: addressData.data.phone,
     addressEmail: addressData.data.email,
-    addressUUID: addressData.data.uuid,
     addressActive: addressData.data.active,
     addressStartDate: addressData.data.start_date,
     addressEndDate: addressData.data.end_date,
-  });}
-  else{
-    return Alpine.store("addressData",{
-      shippingAddressList: [...addressData.data]
-    })
-  }
+  })
 }
 
-// the address data retrieval could/should be moved into Django
-// minimally a single api call could/should solve this
-async function getAddressFromCustomer(uuid, type) {
-  // returns a given customer's address data object
-  const customerURL = await axios
-    .get(`/api1/customers/${uuid}/`)
-    .catch((error) => console.log(error));
-
-  if (type === "billing") {
-    return getAddressData(customerURL.data.billing_address, 'billing');
-  } else if (type === "shipping") {
-    return getAddressData(customerURL.data.shipping_addresses, 'shipping');
-  } else {
-    throw new Error("500 Error or missing address type");
-  }
-}
 
 // POST or PUT address data to /api1/
 async function submitAddressData(url) {

@@ -1,33 +1,26 @@
 {% extends 'index.html' %} {% load customer_tags %} {% block body %}
 
-<div class="container w-50">
+<input
+  type="hidden"
+  name="customerUUID"
+  id="customerUUID"
+  value="{{ customer.uuid }}"
+/>
+<div class="container w-50" >
   {% if is_update_view %}
   <h2 class="mb-3" id="updateFlag">Update Customer</h2>
   {% else %}
   <h2 class="mb-3">Create Customer</h2>
-  {% endif %}
+  {% endif %} {% load crispy_forms_tags %}
 
-  {% load crispy_forms_tags %}
+  <form method="post" @submit.prevent="" id="customerForm">
+    {% csrf_token %} {% include "./partials/_customer_header_form.html" %}
+    {%include "./partials/_shipping_addresses.html" %}
 
-    <form method="post">
-      {% csrf_token %}
-
-      {% include "./partials/_customer_header_form.html" %}
-
-
-     {% include "./partials/_shipping_addresses.html" %}
-
-
-
-
-
-
-
-
-      <button class="btn btn-primary" type="submit">Submit</button>
-    </form>
-
+    <button class="btn btn-primary" type="submit">Submit</button>
+  </form>
 </div>
+
 
 
 {% include "customer/address_form.html" %} {% endblock body %}

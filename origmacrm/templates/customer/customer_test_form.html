@@ -1,25 +1,19 @@
-{% extends 'index.html' %}
-{% load customer_tags %}
-{% block body %}
+{% extends 'index.html' %} {% load customer_tags %} {% block body %}
 
 <div class="container w-50">
   {% if is_update_view %}
   <h2 class="mb-3" id="updateFlag">Update Customer</h2>
   {% else %}
   <h2 class="mb-3">Create Customer</h2>
-  {% endif %}
+  {% endif %} {% load crispy_forms_tags %}
 
-  {% load crispy_forms_tags %}
-
-  <form method="post">
-    {% csrf_token %}
-    {% crispy form %}
-
-</form>
+  <form method="post">{% csrf_token %} {% crispy form %}</form>
 </div>
-<input type="hidden" name="customerUUID" id="customerUUID"
-  value="{{ customer.uuid }}" />
+<input
+  type="hidden"
+  name="customerUUID"
+  id="customerUUID"
+  value="{{ customer.uuid }}"
+/>
 
-  {% include "customer/address_form.html" %}
-
-{% endblock body %}
+{% include "customer/address_form.html" %} {% endblock body %}
