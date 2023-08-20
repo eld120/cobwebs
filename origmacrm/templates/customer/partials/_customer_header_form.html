@@ -107,7 +107,7 @@
               >
                 <template x-for="option in $store.customerData?.customerShippingAddressList" :key="option.uuid"
                 >
-                    <option x-text="option.name" ></option>
+                    <option x-text="`${option.name} ${option.address_1} ${option.city} ${option.state} ${option.zip_code}`" ></option>
                 </template>
               </select>
               <label for="id_billing_address">
