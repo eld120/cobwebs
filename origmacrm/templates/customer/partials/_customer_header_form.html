@@ -54,7 +54,7 @@
           x-model="$store.customerData.customerActive"
           id="customerActive">
         <template x-for="active in $store.customerData.customerActiveOptions" :key="active[0]">
-            <option :value="active[0]" x-text="active[1]"></option>
+            <option :value="active[0]" x-text="active[1]" :selected="$store.customerData.customerActive === active[0]"></option>
         </template>
         </select>
         <label for="customerActive">Active Status<span class="asteriskField">*</label>
@@ -71,7 +71,8 @@
 
 
         <template x-for="option in $store.customerData?.customerCustomerTypeOptions" :key="option[0]">
-            <option :value="$store.customerData?.customerCustomerType" x-text="option[1]"></option>
+            <option :value="option[0]" x-text="option[1]"
+            x-bind:selected="$store.customerData?.customerCustomerType === option[0] "></option>
         </template>
     </select>
         <label for="customerCustomerType">Customer Type<span class="asteriskField">*</label>
@@ -95,7 +96,7 @@
     </div>
 
     <div class="row">
-        <div class="input-group input-group-sm mb-2">
+        <div class="form-floating mb-3">
             <select
                 name="billing_address"
                 class="select form-select"
@@ -107,7 +108,8 @@
               >
                 <template x-for="option in $store.customerData?.customerShippingAddressList" :key="option.uuid"
                 >
-                    <option x-text="`${option.name} ${option.address_1} ${option.city} ${option.state} ${option.zip_code}`" ></option>
+                    <option x-text="`${option.name} ${option.address_1} ${option.city} ${option.state} ${option.zip_code}`"
+                    x-bind:selected="$store.customerData.customerBillingAddress == `http://127.0.0.1:8000/api1/addresses/${option.uuid}/`"></option>
                 </template>
               </select>
               <label for="id_billing_address">
