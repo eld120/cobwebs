@@ -41,10 +41,10 @@ class CustomerSerializer(serializers.HyperlinkedModelSerializer):
             "billing_address",
             "shipping_addresses",
             "shipping_addresses_list",
-            "start_date",
-            "end_date",
             "active",
             "active_options",
+            "start_date",
+            "end_date",
             "customer_type",
             "customer_type_options",
             "created_by",
@@ -108,6 +108,7 @@ class AddressSerializer(serializers.HyperlinkedModelSerializer):
                         "state",
                         "zip_code",
                     ),
+                    message="This address exists within the database",
                 )
             ]
 
