@@ -31,17 +31,16 @@ function enableFormButton(formElement, buttonElement) {
 
 // toggles the title of the address form - should be moved into the address template
 function createOrUpdate(button) {
-  if (button.id === "") {
-    // a button without an id is equal to an empty string
-    Alpine.store("createOrUpdate", {
-      title: "Create Address",
-      method: "POST",
-    });
-  } else {
-    // update buttons have a specific element ID
+  if (button.id === "updateFlag") {
     Alpine.store("createOrUpdate", {
       title: "Update Address",
       method: "PUT",
+    });
+
+  } else {
+    Alpine.store("createOrUpdate", {
+      title: "Create Address",
+      method: "POST",
     });
   }
 }
