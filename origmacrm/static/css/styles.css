@@ -72,7 +72,6 @@ select {
   }
 }
 .edit-btn {
-  background-image: url(../svg/edit_FILL0_wght400_GRAD0_opsz24.svg);
   background-repeat: no-repeat;
   min-width: 1.5em;
   background-position: center;
@@ -80,7 +79,6 @@ select {
 }
 
 .add-btn {
-  background-image: url(../svg/add_FILL0_wght400_GRAD0_opsz24.svg);
   background-repeat: no-repeat;
   min-width: 1.5em;
   margin: 0 auto;

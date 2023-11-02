@@ -329,3 +329,5 @@ Thumbs.db
 # Random Crap I create #
 #######################
 .datadump.json
+
+package-lock.json
