@@ -27,16 +27,15 @@
             addressActive: '',
             addressStartDate: '',
             addressEndDate: '',
-            httpMethod:'',
             addressUUID: '',
-            shippingAddressList: [],
+
             })"
             x-data="{ status: 'normal', errors: {} }">
           {% csrf_token %}
           <div x-show="status === 'normal'">
 
             <input type="hidden" x-data x-model="$store.createOrUpdate.method"
-            x-init="$watch('$store.createOrUpdate.method', ()=> console.log($store.createOrUpdate.method))"
+            {% comment %} x-init="$watch('$store.createOrUpdate.method', ()=> console.log($store.createOrUpdate.method))" {% endcomment %}
              :value="$store.createOrUpdate.method">
             <div class="form-check form-switch" >
               <input class="form-check-input" type="checkbox" role="switch" id="addressPrimarySwitch"

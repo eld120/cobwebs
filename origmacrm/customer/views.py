@@ -33,12 +33,12 @@ class CustomerDetailView(LoginRequiredMixin, SingleObjectMixin, DetailView):
 
 class CustomerCreateView(LoginRequiredMixin, SingleObjectMixin, CreateView):
     form_class = CustomerForm
-    template_name = "customer/customer_test_form.html"
+    template_name = "customer/customer_form.html"
 
 
 class CustomerUpdateView(LoginRequiredMixin, SingleObjectMixin, UpdateView):
     form_class = CustomerForm
-    template_name = "customer/customer_test_form.html"
+    template_name = "customer/customer_form.html"
 
 
 class AddressCreateView(LoginRequiredMixin, CreateView):

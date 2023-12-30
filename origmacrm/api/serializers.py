@@ -25,6 +25,12 @@ class CustomerSerializer(serializers.HyperlinkedModelSerializer):
         many=False,
         queryset=User.objects.all(),
     )
+    customer_type_options = serializers.SerializerMethodField(
+        method_name="get_customer_industry_list"
+    )
+    active_options = serializers.SerializerMethodField(
+        method_name="get_customer_active_list"
+    )
 
     class Meta:
         model = Customer
@@ -35,10 +41,12 @@ class CustomerSerializer(serializers.HyperlinkedModelSerializer):
             "billing_address",
             "shipping_addresses",
             "shipping_addresses_list",
+            "active",
+            "active_options",
             "start_date",
             "end_date",
-            "active",
             "customer_type",
+            "customer_type_options",
             "created_by",
         )
         validators = [
@@ -53,6 +61,12 @@ class CustomerSerializer(serializers.HyperlinkedModelSerializer):
 
     def get_shipping_addresses_list(self, obj):
         return obj.get_shipping_addresses()
+
+    def get_customer_industry_list(self, obj):
+        return obj.get_customer_industry_options()
+
+    def get_customer_active_list(self, obj):
+        return obj.get_customer_active_options()
 
 
 class AddressSerializer(serializers.HyperlinkedModelSerializer):
@@ -94,6 +108,7 @@ class AddressSerializer(serializers.HyperlinkedModelSerializer):
                         "state",
                         "zip_code",
                     ),
+                    message="This address exists within the database",
                 )
             ]
 

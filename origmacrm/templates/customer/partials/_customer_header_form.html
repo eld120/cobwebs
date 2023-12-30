@@ -1,0 +1,132 @@
+
+
+    <div class="form-floating mb-3" x-init="Alpine.store('customerData',{
+        customerDBA: '',
+        customerName: '',
+        customerUUID: '',
+        customerBillingAddress: '',
+        customerShippingAddresses: [],
+        customerShippingAddressList: [],
+        customerActive: '',
+        customerActiveOptions: [],
+        customerCustomerType: '',
+        customerCustomerTypeOptions: [],
+        customerStartDate: '',
+        customerEndDate: '',
+        customerHTTPMethod: '',
+        customerCreatedBy: '',
+      })">
+        <input class="form-control" id="custUUID"
+            name="uuid"
+            x-data
+            x-model="$store.customerData.customerUUID"
+            :value="$store.customerData?.customerUUID" disabled>
+        <label  for="custUUID">ID</label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input class="form-control" type="text" id="customerDBA" required
+            name="dba"
+            maxlength="50"
+            x-data
+            x-model="$store.customerData.customerDBA"
+            :value="$store.customerData?.customerDBA">
+        <label for="customerDBA">DBA<span class="asteriskField">*</label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input class="form-control textinput " type="text" id="customerName" required
+            name="name"
+            maxlength="50"
+            x-data
+            x-model="$store.customerData.customerName"
+            :value="$store.customerData?.customerName">
+        <label for="customerName">Name<span class="asteriskField">*</label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <select
+          name="active"
+          class="select form-select"
+          placeholder="active"
+          required
+          x-data
+          x-model="$store.customerData.customerActive"
+          id="customerActive">
+        <template x-for="active in $store.customerData.customerActiveOptions" :key="active[0]">
+            <option :value="active[0]" x-text="active[1]" :selected="$store.customerData.customerActive === active[0]"></option>
+        </template>
+        </select>
+        <label for="customerActive">Active Status<span class="asteriskField">*</label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <select name="customer_type"
+        class="select form-select"
+        placeholder="customer_type"
+        required
+        id="id_customerType"
+        x-data
+        x-model="$store.customerData.customerCustomerType">
+
+
+        <template x-for="option in $store.customerData?.customerCustomerTypeOptions" :key="option[0]">
+            <option :value="option[0]" x-text="option[1]"
+            x-bind:selected="$store.customerData?.customerCustomerType === option[0] "></option>
+        </template>
+    </select>
+        <label for="customerCustomerType">Customer Type<span class="asteriskField">*</label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input class="form-control dateinput" type="date" id="customerStartDate" required
+        x-data
+        x-model="$store.customerData.customerStartDate"
+        :value="$store.customerData?.customerStartDate">
+        <label for="customerStartDate">Start Date<span class="asteriskField">*</label>
+    </div>
+
+    <div class="form-floating mb-3">
+        <input class="form-control dateinput" type="date" id="customerEndDate"
+        x-data
+        x-model="$store.customerData.customerEndDate"
+        :value="$store.customerData?.customerEndDate">
+        <label for="customerEndDate">End Date</label>
+
+    </div>
+
+
+        <div class="form-floating mb-3">
+            <select
+                name="billing_address"
+                class="select form-select"
+                placeholder="billing_address"
+                required
+                id="id_billing_address"
+                x-data
+                x-model="$store.customerData.customerBillingAddress"
+              >
+                <template x-for="option in $store.customerData?.customerShippingAddressList" :key="option.uuid"
+                >
+                    <option x-text="`${option.name} ${option.address_1} ${option.city} ${option.state} ${option.zip_code}`"
+                    x-bind:selected="$store.customerData.customerBillingAddress == `http://127.0.0.1:8000/api1/addresses/${option.uuid}/`"></option>
+                </template>
+              </select>
+              <label for="id_billing_address">
+                Billing Address<span class="asteriskField">*</span>
+              </label>
+
+        <button
+            class="btn btn-tertiary input-group-text add-btn"
+            data-bs-target="#createAddressModal"
+            data-bs-toggle="modal"
+            type="button"
+          ></button>
+          <button
+            class="btn btn-tertiary input-group-text edit-btn"
+            data-bs-target="#createAddressModal"
+            data-bs-toggle="modal"
+            id="billingAddressButton"
+            type="button"
+          ></button>
+        </div>

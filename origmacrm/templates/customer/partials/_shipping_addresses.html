@@ -1,0 +1,24 @@
+<div class="col">
+  <h3>Shipping Addresses</h3>
+  <div class="input-group input-group-sm mb-2">
+    <button
+      class="btn btn-tertiary input-group-text add-btn"
+      data-bs-target="#createAddressModal"
+      data-bs-toggle="modal"
+      type="button"
+    >
+      Create Shipping Address
+    </button>
+
+    <template
+      x-for="option in $store.customerData?.customerShippingAddressList"
+      :key="option.uuid"
+    >
+      <button
+        type="button"
+        class="btn btn-outline-secondary edit-btn"
+        x-text="`${option.name} ${option.address_1} ${option.city} ${option.state} ${option.zip_code}`"
+      ></button>
+    </template>
+  </div>
+</div>
