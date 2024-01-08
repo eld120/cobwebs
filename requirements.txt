@@ -15,7 +15,7 @@ coverage==7.2.7
 crispy-bootstrap5==0.7
 dill==0.3.6
 distlib==0.3.6
-Django==4.2.3
+Django==4.2.8
 django-cors-headers==4.1.0
 django-coverage-plugin==3.0.0
 django-crispy-forms==2.0
@@ -88,6 +88,6 @@ tornado==6.3.3
 typeguard==3.0.2
 typing_extensions==4.6.3
 tzdata==2023.3
-urllib3==2.0.3
+urllib3==2.1.0
 virtualenv==20.23.0
 wrapt==1.15.0
